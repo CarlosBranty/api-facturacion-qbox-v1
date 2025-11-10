@@ -16,7 +16,49 @@ Esta guía te ayudará a desplegar la API de Facturación Electrónica SUNAT en 
 2. Selecciona **Docker Compose**
 3. Conecta tu repositorio Git
 
-### 2. Configurar Variables de Entorno
+### 2. Configurar Dominios en Coolify
+
+Cuando Coolify te pida configurar dominios para los servicios, sigue estas instrucciones:
+
+#### ⚠️ IMPORTANTE: Solo nginx necesita dominio público
+
+- **Servicio `nginx`**: ✅ **SÍ necesita dominio**
+  - Dominio: `api.tu-dominio.com` (o el que prefieras)
+  - Puerto: `80` (o deja vacío si Coolify lo detecta automáticamente)
+  - URL completa: `https://api.tu-dominio.com` (Coolify agregará HTTPS automáticamente)
+  - Si tienes un puerto específico: `https://api.tu-dominio.com:8080` (solo si es necesario)
+
+- **Servicio `app` (PHP-FPM)**: ❌ **NO necesita dominio**
+  - Este servicio es interno y solo se comunica con nginx
+  - Si Coolify te pregunta, puedes dejarlo vacío o poner `localhost`
+  - No es accesible desde fuera del contenedor
+
+- **Servicio `postgres`**: ❌ **NO necesita dominio**
+  - Base de datos interna, no accesible públicamente
+  - Si Coolify pregunta, déjalo vacío
+
+#### Configuración en Coolify:
+
+1. Cuando te pregunte por el dominio del servicio **nginx**:
+   - Ingresa: `api.tu-dominio.com` (sin http:// ni https://)
+   - Puerto: `80` (o déjalo vacío)
+   - Coolify configurará automáticamente HTTPS con Let's Encrypt
+
+2. Si te pregunta por el dominio del servicio **app**:
+   - Puedes poner: `localhost` o dejarlo vacío
+   - O simplemente ignora esta pregunta si es opcional
+
+3. **Actualiza la variable `APP_URL`** en las variables de entorno con tu dominio real:
+   ```env
+   APP_URL=https://api.tu-dominio.com
+   ```
+
+4. **Actualiza `SANCTUM_STATEFUL_DOMAINS`** con tu dominio:
+   ```env
+   SANCTUM_STATEFUL_DOMAINS=api.tu-dominio.com,www.api.tu-dominio.com
+   ```
+
+### 3. Configurar Variables de Entorno
 
 En la sección de **Environment Variables** de Coolify, configura las siguientes variables. Puedes usar el archivo `env.docker.example` como referencia:
 
@@ -106,7 +148,7 @@ RUN_MIGRATIONS=false
 
 **Nota importante**: Asegúrate de actualizar `SANCTUM_STATEFUL_DOMAINS` con tu dominio real en producción.
 
-### 3. Generar APP_KEY
+### 4. Generar APP_KEY
 
 Antes del primer despliegue, genera una clave de aplicación:
 
@@ -120,12 +162,12 @@ O ejecuta este comando en el contenedor después del despliegue:
 docker exec -it api-facturacion-app php artisan key:generate
 ```
 
-### 4. Configurar Certificados SUNAT
+### 5. Configurar Certificados SUNAT
 
 1. Sube tus certificados a `storage/certificates/`
 2. Configura las rutas en las variables de entorno o en la base de datos después del despliegue
 
-### 5. Ejecutar Migraciones
+### 6. Ejecutar Migraciones
 
 Después del primer despliegue, ejecuta las migraciones:
 
@@ -135,7 +177,7 @@ docker exec -it api-facturacion-app php artisan migrate --force
 
 O desde Coolify, puedes ejecutar comandos en el contenedor.
 
-### 6. Configurar Permisos de Storage
+### 7. Configurar Permisos de Storage
 
 Asegúrate de que los directorios de storage tengan los permisos correctos:
 
