@@ -3,6 +3,17 @@ set -e
 
 echo "🚀 Iniciando aplicación Laravel..."
 
+# Asegurar que .env exista (copiar de .env.example si no existe)
+if [ ! -f /var/www/html/.env ]; then
+    echo "📝 Archivo .env no encontrado, copiando desde .env.example..."
+    if [ -f /var/www/html/.env.example ]; then
+        cp /var/www/html/.env.example /var/www/html/.env
+        echo "✅ Archivo .env creado desde .env.example"
+    else
+        echo "⚠️  Advertencia: .env.example no encontrado"
+    fi
+fi
+
 # Esperar a que PostgreSQL esté listo
 echo "⏳ Esperando a que PostgreSQL esté disponible..."
 until php -r "try { \$pdo = new PDO('pgsql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT').';dbname='.getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD')); echo 'OK'; exit(0); } catch (Exception \$e) { exit(1); }" 2>/dev/null; do

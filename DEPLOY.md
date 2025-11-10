@@ -60,7 +60,17 @@ Cuando Coolify te pida configurar dominios para los servicios, sigue estas instr
 
 ### 3. Configurar Variables de Entorno
 
-En la sección de **Environment Variables** de Coolify, configura las siguientes variables. Puedes usar el archivo `env.docker.example` como referencia:
+⚠️ **IMPORTANTE**: En Coolify, las variables de entorno **NO se cargan automáticamente** desde archivos `.env` del repositorio. Debes configurarlas **manualmente** en la interfaz de Coolify.
+
+#### Opciones para configurar variables:
+
+1. **Manual**: Ve a **Environment Variables** en Coolify y agrega cada variable
+2. **Importar**: Si Coolify lo permite, importa desde el archivo `env.docker.example`
+3. **Referencia**: Usa el archivo `VARIABLES_ENV.md` que contiene la lista completa
+
+#### Variables Mínimas Requeridas:
+
+En la sección de **Environment Variables** de Coolify, configura al menos estas variables. Puedes usar el archivo `env.docker.example` como referencia:
 
 ```env
 # Aplicación
