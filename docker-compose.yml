@@ -37,7 +37,6 @@ services:
       - "80:80"
     volumes:
       - ./:/var/www/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - facturacion-network
     depends_on:
@@ -45,6 +44,12 @@ services:
     labels:
       - "coolify.port=80"
       - "coolify.name=nginx"
+    # Copiar configuración de nginx al iniciar
+    command: >
+      sh -c "
+        cp /var/www/html/docker/nginx/default.conf /etc/nginx/conf.d/default.conf &&
+        nginx -g 'daemon off;'
+      "
 
   postgres:
     image: postgres:16-alpine
