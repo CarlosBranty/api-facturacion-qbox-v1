@@ -121,6 +121,27 @@ docker build --progress=plain --no-cache -t api-facturacion . 2>&1 | tee build.l
 
 Esto guardará todos los logs en `build.log` para que puedas revisarlos.
 
+## Solución Alternativa: Dockerfile Simple
+
+Si el build multi-stage sigue fallando, puedes usar el `Dockerfile.simple` que instala las dependencias directamente en la imagen PHP:
+
+```bash
+docker build -f Dockerfile.simple -t api-facturacion .
+```
+
+O renombra el archivo:
+
+```bash
+cp Dockerfile.simple Dockerfile
+docker build -t api-facturacion .
+```
+
+Este Dockerfile alternativo:
+- Instala todas las extensiones PHP primero
+- Luego instala las dependencias de Composer
+- Usa `--ignore-platform-reqs` para evitar problemas de compatibilidad
+- Tiene mejor manejo de errores con múltiples intentos
+
 ## Contacto
 
 Si ninguna de estas soluciones funciona, verifica:
