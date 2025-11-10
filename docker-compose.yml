@@ -48,7 +48,9 @@ services:
     # Copiar configuración de nginx al iniciar
     command: >
       sh -c "
-        cp /var/www/html/docker/nginx/default.conf /etc/nginx/conf.d/default.conf &&
+        if [ -f /var/www/html/docker/nginx/default.conf ]; then
+          cp /var/www/html/docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+        fi &&
         nginx -g 'daemon off;'
       "
 
@@ -73,8 +75,32 @@ services:
       timeout: 5s
       retries: 5
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: api-facturacion-pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@facturacion.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-admin}
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - facturacion-network
+    depends_on:
+      - postgres
+    labels:
+      - "coolify.port=80"
+      - "coolify.name=pgadmin"
+    # Si quieres acceso directo (opcional), descomenta la siguiente línea:
+    # ports:
+    #   - "5050:80"
+
 volumes:
   postgres_data:
+    driver: local
+  pgadmin_data:
     driver: local
 
 networks:
