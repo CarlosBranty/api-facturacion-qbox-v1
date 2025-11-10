@@ -33,8 +33,9 @@ services:
     image: nginx:alpine
     container_name: api-facturacion-nginx
     restart: unless-stopped
-    ports:
-      - "80:80"
+    # No exponer puerto directamente - Coolify maneja el enrutamiento
+    # ports:
+    #   - "80:80"
     volumes:
       - ./:/var/www/html
     networks:
