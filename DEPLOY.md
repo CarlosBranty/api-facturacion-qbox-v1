@@ -64,9 +64,28 @@ Cuando Coolify te pida configurar dominios para los servicios, sigue estas instr
 
 #### Opciones para configurar variables:
 
-1. **Manual**: Ve a **Environment Variables** en Coolify y agrega cada variable
-2. **Importar**: Si Coolify lo permite, importa desde el archivo `env.docker.example`
-3. **Referencia**: Usa el archivo `VARIABLES_ENV.md` que contiene la lista completa
+1. **Importar desde archivo** (Recomendado):
+   - Ve a **Environment Variables** en Coolify
+   - Busca la opción "Import from file" o "Bulk import"
+   - Copia el contenido del archivo `coolify.env.example` y pégalo
+   - O sube el archivo `coolify.env.example` directamente
+
+2. **Manual**: Ve a **Environment Variables** en Coolify y agrega cada variable una por una
+
+3. **Referencia**: Usa el archivo `VARIABLES_ENV.md` que contiene la lista completa con descripciones
+
+#### Pasos rápidos:
+
+1. Abre el archivo `coolify.env.example` en tu editor
+2. Copia TODO el contenido
+3. En Coolify, ve a tu aplicación → **Environment Variables**
+4. Busca el botón "Import" o "Bulk edit" (puede estar como "..." o "More options")
+5. Pega el contenido copiado
+6. **IMPORTANTE**: Actualiza estos valores con tus datos reales:
+   - `APP_URL=https://tu-dominio-real.com`
+   - `DB_PASSWORD=tu_password_seguro`
+   - `SANCTUM_STATEFUL_DOMAINS=tu-dominio-real.com`
+   - `APP_KEY=` (dejar vacío, se generará después)
 
 #### Variables Mínimas Requeridas:
 

@@ -11,9 +11,13 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
     libpq-dev \
+    libicu-dev \
     zip \
     unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Configurar límite de memoria para Composer
+RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Instalar extensiones PHP necesarias
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -27,6 +31,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     bcmath \
     gd \
     zip \
+    intl \
     opcache \
     && docker-php-ext-enable opcache
 
@@ -42,8 +47,17 @@ COPY composer.json composer.lock ./
 # Instalar dependencias de PHP (sin dev para producción)
 # Instalar sin scripts primero, luego ejecutaremos los scripts después de copiar los archivos
 RUN set -eux; \
+    echo "📦 Verificando Composer..."; \
     composer --version; \
-    composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
+    echo "📦 Verificando extensiones PHP..."; \
+    php -m; \
+    echo "📦 Instalando dependencias..."; \
+    COMPOSER_MEMORY_LIMIT=512M composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts || \
+    (echo "⚠️ Primera instalación falló, intentando con más verbosidad..." && \
+     COMPOSER_MEMORY_LIMIT=512M composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts -vvv || \
+     (echo "❌ Error en composer install. Diagnóstico:" && \
+      composer diagnose && \
+      exit 1))
 
 # Copiar el resto de la aplicación
 COPY . .
