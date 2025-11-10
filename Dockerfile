@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
@@ -14,7 +16,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar extensiones PHP necesarias
-RUN docker-php-ext-install \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
     pdo \
     pdo_pgsql \
     pgsql \
@@ -24,7 +27,8 @@ RUN docker-php-ext-install \
     bcmath \
     gd \
     zip \
-    opcache
+    opcache \
+    && docker-php-ext-enable opcache
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -36,10 +40,16 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
 # Instalar dependencias de PHP (sin dev para producción)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+# Instalar sin scripts primero, luego ejecutaremos los scripts después de copiar los archivos
+RUN set -eux; \
+    composer --version; \
+    composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
 
 # Copiar el resto de la aplicación
 COPY . .
+
+# Ejecutar scripts de composer después de copiar todos los archivos
+RUN composer dump-autoload --optimize --no-interaction
 
 # Copiar script de entrada
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
