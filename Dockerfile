@@ -1,3 +1,10 @@
+# Stage 1: Instalar dependencias de Composer
+FROM composer:latest AS composer-deps
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
+
+# Stage 2: Imagen final de producción
 FROM php:8.2-fpm
 
 # Instalar dependencias del sistema
@@ -16,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Configurar límite de memoria para Composer
+# Configurar límite de memoria para PHP
 RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Instalar extensiones PHP necesarias
@@ -35,29 +42,17 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache \
     && docker-php-ext-enable opcache
 
-# Instalar Composer
+# Instalar Composer en la imagen final (para dump-autoload)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Configurar directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar archivos de configuración
+# Copiar archivos de composer primero
 COPY composer.json composer.lock ./
 
-# Instalar dependencias de PHP (sin dev para producción)
-# Instalar sin scripts primero, luego ejecutaremos los scripts después de copiar los archivos
-RUN set -eux; \
-    echo "📦 Verificando Composer..."; \
-    composer --version; \
-    echo "📦 Verificando extensiones PHP..."; \
-    php -m; \
-    echo "📦 Instalando dependencias..."; \
-    COMPOSER_MEMORY_LIMIT=512M composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts || \
-    (echo "⚠️ Primera instalación falló, intentando con más verbosidad..." && \
-     COMPOSER_MEMORY_LIMIT=512M composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts -vvv || \
-     (echo "❌ Error en composer install. Diagnóstico:" && \
-      composer diagnose && \
-      exit 1))
+# Copiar dependencias instaladas desde el stage anterior
+COPY --from=composer-deps /app/vendor /var/www/html/vendor
 
 # Copiar el resto de la aplicación
 COPY . .
