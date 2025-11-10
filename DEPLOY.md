@@ -18,15 +18,29 @@ Esta guía te ayudará a desplegar la API de Facturación Electrónica SUNAT en 
 
 ### 2. Configurar Variables de Entorno
 
-En la sección de **Environment Variables** de Coolify, configura las siguientes variables:
+En la sección de **Environment Variables** de Coolify, configura las siguientes variables. Puedes usar el archivo `env.docker.example` como referencia:
 
 ```env
 # Aplicación
 APP_NAME="API Facturación SUNAT"
 APP_ENV=production
+APP_KEY=
 APP_DEBUG=false
 APP_URL=https://tu-dominio.com
-APP_KEY=base64:tu-clave-generada-aqui
+
+APP_LOCALE=es
+APP_FALLBACK_LOCALE=es
+APP_FAKER_LOCALE=es_PE
+
+APP_MAINTENANCE_DRIVER=file
+
+PHP_CLI_SERVER_WORKERS=4
+BCRYPT_ROUNDS=12
+
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=error
 
 # Base de Datos PostgreSQL
 DB_CONNECTION=pgsql
@@ -36,24 +50,61 @@ DB_DATABASE=facturacion_sunat
 DB_USERNAME=postgres
 DB_PASSWORD=tu_password_seguro
 
-# Puerto de la aplicación (Coolify lo manejará automáticamente)
-APP_PORT=80
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
 
-# Cache y Sesiones (opcional, para producción)
-CACHE_DRIVER=file
-SESSION_DRIVER=file
-QUEUE_CONNECTION=sync
+BROADCAST_CONNECTION=log
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
 
-# Mail (configurar según tu proveedor)
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
+CACHE_STORE=database
+
+REDIS_CLIENT=phpredis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=log
+MAIL_SCHEME=null
+MAIL_HOST=127.0.0.1
 MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="noreply@example.com"
+MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
+
+# Sanctum Configuration
+SANCTUM_STATEFUL_DOMAINS=tu-dominio.com,www.tu-dominio.com
+SANCTUM_EXPIRATION=1440
+SANCTUM_TOKEN_PREFIX=sunat_
+SANCTUM_VERIFY_IP=false
+SANCTUM_LOG_USAGE=true
+SANCTUM_MAX_INACTIVITY=120
+SANCTUM_MAX_TOKENS=10
+SANCTUM_ROTATE_TOKENS=false
+SANCTUM_PURGE_DAYS=7
+
+# SUNAT Configuration
+SUNAT_ENVIRONMENT=beta
+SUNAT_CERTIFICATE_PATH=
+SUNAT_CERTIFICATE_PASSWORD=
+SUNAT_PRIVATE_KEY_PATH=
+
+# Files Configuration
+FILES_STORAGE_PATH=storage/app/sunat
+FILES_MAX_SIZE=10240
+
+VITE_APP_NAME="${APP_NAME}"
+
+# Docker Configuration
+APP_PORT=80
+RUN_MIGRATIONS=false
 ```
+
+**Nota importante**: Asegúrate de actualizar `SANCTUM_STATEFUL_DOMAINS` con tu dominio real en producción.
 
 ### 3. Generar APP_KEY
 
