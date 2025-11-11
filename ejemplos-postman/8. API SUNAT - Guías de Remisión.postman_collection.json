@@ -55,7 +55,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/catalogs/transfer-reasons",
+							"raw": "{{base_url}}/v1/dispatch-guides/catalogs/transfer-reasons",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -133,7 +133,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/catalogs/transport-modes",
+							"raw": "{{base_url}}/v1/dispatch-guides/catalogs/transport-modes",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -207,7 +207,7 @@
 							"raw": "\n  {\n      \"company_id\": 1,\n      \"branch_id\": 1,\n      \"destinatario_id\": 2,\n      \"serie\": \"T001\",\n      \"fecha_emision\": \"2025-09-07\",\n      \"fecha_traslado\": \"2025-09-08\",\n\n      \"cod_traslado\": \"01\",\n      \"des_traslado\": \"Venta\",\n      \"mod_traslado\": \"02\",\n      \"peso_total\": 12.5,\n      \"und_peso_total\": \"KGM\",\n      \"num_bultos\": 1,\n\n      \"partida_ubigeo\": \"150203\",\n      \"partida_direccion\": \"AV ITALIA\",\n      \"llegada_ubigeo\": \"150101\",\n      \"llegada_direccion\": \"AV LIMA\",\n\n      \"vehiculo_placa\": \"ABC123\",\n      \"vehiculo_placa_secundaria\": \"ABI456\",\n\n      \"conductor_tipo\": \"Principal\",\n      \"conductor_tipo_doc\": \"1\",\n      \"conductor_num_doc\": \"44004400\",\n      \"conductor_licencia\": \"0001122020\",\n      \"conductor_nombres\": \"ROBERTO\",\n      \"conductor_apellidos\": \"RODRIGUEZ VALENCIA\",\n\n      \"detalles\": [\n          {\n              \"cantidad\": 2,\n              \"unidad\": \"ZZ\",\n              \"descripcion\": \"PROD 1\",\n              \"codigo\": \"PROD1\",\n              \"peso_total\": 12.5\n          }\n      ],\n\n      \"usuario_creacion\": \"POSTMAN_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -273,7 +273,7 @@
 							"raw": " {\n      \"company_id\": 2,\n      \"branch_id\": 2,\n      \"destinatario_id\": 1,\n      \"serie\": \"T001\",\n      \"fecha_emision\": \"2025-09-07\",\n      \"fecha_traslado\": \"2025-09-08\",\n\n      \"cod_traslado\": \"01\",\n      \"des_traslado\": \"Venta\",\n      \"mod_traslado\": \"01\",\n      \"peso_total\": 12.5,\n      \"und_peso_total\": \"KGM\",\n      \"num_bultos\": 1,\n\n      \"partida_ubigeo\": \"150203\",\n      \"partida_direccion\": \"AV ITALIA\",\n      \"llegada_ubigeo\": \"150101\",\n      \"llegada_direccion\": \"AV LIMA\",\n\n      \"transportista_tipo_doc\": \"6\",\n      \"transportista_num_doc\": \"20000000002\",\n      \"transportista_razon_social\": \"TRANSPORTES S.A.C\",\n      \"transportista_nro_mtc\": \"0001\",\n\n      \"detalles\": [\n          {\n              \"cantidad\": 2,\n              \"unidad\": \"ZZ\",\n              \"descripcion\": \"PROD 1\",\n              \"codigo\": \"PROD1\",\n              \"peso_total\": 12.5\n          }\n      ],\n\n      \"usuario_creacion\": \"POSTMAN_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -337,7 +337,7 @@
 							"raw": " {\n    \"company_id\": 2,\n    \"branch_id\": 2,\n    \"destinatario_id\": 2,\n    \"serie\": \"T001\",\n    \"fecha_emision\": \"2025-09-08\",\n    \"fecha_traslado\": \"2025-09-09\",\n    \"version\": \"2022\",\n    \"cod_traslado\": \"04\",\n    \"des_traslado\": \"Traslado entre establecimientos de la misma empresa\",\n    \"mod_traslado\": \"02\",\n    \"peso_total\": 12.5,\n    \"und_peso_total\": \"KGM\",\n    \"num_bultos\": 1,\n    \"partida\": {\n      \"ubigeo\": \"150203\",\n      \"direccion\": \"AV ITALIA\",\n      \"ruc\": \"20161515648\",\n      \"cod_local\": \"00001\"\n    },\n    \"llegada\": {\n      \"ubigeo\": \"150101\",\n      \"direccion\": \"AV LIMA\",\n      \"ruc\": \"20161515648\",\n      \"cod_local\": \"00002\"\n    },\n    \"indicadores\": [\"SUNAT_Envio_IndicadorTrasladoVehiculoM1L\"],\n    \"detalles\": [{\n      \"codigo\": \"PROD1\",\n      \"unidad\": \"ZZ\",\n      \"cantidad\": 2,\n      \"peso_total\": 12.5,\n      \"descripcion\": \"PROD 1\"\n    }],\n    \"usuario_creacion\": \"API_FINAL_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -401,7 +401,7 @@
 							"raw": " {\n      \"company_id\": 2,\n      \"branch_id\": 2,\n      \"destinatario_id\": 1,\n      \"serie\": \"T001\",\n      \"fecha_emision\": \"2025-09-07\",\n      \"fecha_traslado\": \"2025-09-08\",\n\n      \"cod_traslado\": \"01\",\n      \"des_traslado\": \"Venta\",\n      \"mod_traslado\": \"02\",\n      \"peso_total\": 12.5,\n      \"und_peso_total\": \"KGM\",\n      \"num_bultos\": 1,\n\n      \"indicadores\": [\"SUNAT_Envio_IndicadorTrasladoVehiculoM1L\"],\n\n      \"partida_ubigeo\": \"150203\",\n      \"partida_direccion\": \"AV ITALIA\",\n      \"llegada_ubigeo\": \"150101\",\n      \"llegada_direccion\": \"AV LIMA\",\n\n      \"detalles\": [\n          {\n              \"cantidad\": 0.5,\n              \"unidad\": \"KGM\",\n              \"descripcion\": \"PROD 1\",\n              \"codigo\": \"PROD1\",\n              \"peso_total\": 0.5\n          }\n      ],\n\n      \"usuario_creacion\": \"POSTMAN_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -465,7 +465,7 @@
 							"raw": " {\n      \"company_id\": 2,\n      \"branch_id\": 2,\n      \"destinatario_id\": 1,\n      \"serie\": \"T001\",\n      \"fecha_emision\": \"2025-09-07\",\n      \"fecha_traslado\": \"2025-09-08\",\n\n      \"cod_traslado\": \"01\",\n      \"des_traslado\": \"Venta\",\n      \"mod_traslado\": \"01\",\n      \"peso_total\": 12.5,\n      \"und_peso_total\": \"KGM\",\n      \"num_bultos\": 1,\n\n      \"partida_ubigeo\": \"150203\",\n      \"partida_direccion\": \"AV ITALIA\",\n      \"llegada_ubigeo\": \"150101\",\n      \"llegada_direccion\": \"AV LIMA\",\n\n      \"transportista_tipo_doc\": \"6\",\n      \"transportista_num_doc\": \"20000000002\",\n      \"transportista_razon_social\": \"TRANSPORTES S.A.C\",\n      \"transportista_nro_mtc\": \"0001\",\n\n      \"documentos_relacionados\": [\n          {\n              \"tipo\": \"49\",\n              \"tipo_desc\": \"Constancia de Depósito - IVAP (Ley 28211)\",\n              \"numero\": \"00000001\"\n          }\n      ],\n\n      \"detalles\": [\n          {\n              \"cantidad\": 2,\n              \"unidad\": \"ZZ\",\n              \"descripcion\": \"PROD 1\",\n              \"codigo\": \"PROD1\",\n              \"peso_total\": 12.5,\n              \"cod_prod_sunat\": \"50161509\",\n              \"atributos\": [\n                  {\n                      \"code\": \"7020\",\n                      \"name\": \"Partida arancelaria\",\n                      \"value\": \"1701130000\"\n                  },\n                  {\n                      \"code\": \"7022\",\n                      \"name\": \"Indicador de bien normalizado\",\n                      \"value\": \"1\"\n                  }\n              ]\n          }\n      ],\n\n      \"observaciones\": \"Guía con documentos adicionales y atributos de productos\",\n      \"usuario_creacion\": \"POSTMAN_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -529,7 +529,7 @@
 							"raw": " {\n    \"company_id\": 2,\n    \"branch_id\": 2,\n    \"destinatario_id\": 3,  // ← Cambio: client_id → destinatario_id\n    \"serie\": \"T001\",\n    \"fecha_emision\": \"2025-09-07\",\n    \"fecha_traslado\": \"2025-09-08\",\n\n    \"cod_traslado\": \"01\",\n    \"des_traslado\": \"Venta\",\n    \"mod_traslado\": \"02\",\n    \"peso_total\": 250.500,\n    \"und_peso_total\": \"KGM\",\n    \"num_bultos\": 20,\n\n    // ← Cambio: campos planos en lugar de objetos anidados\n    \"partida_ubigeo\": \"150101\",\n    \"partida_direccion\": \"PLANTA DE PRODUCCIÓN\",\n    \"llegada_ubigeo\": \"150203\",\n    \"llegada_direccion\": \"CENTRO DE DISTRIBUCIÓN\",\n\n    // ← Cambio: campos directos del conductor\n    \"conductor_tipo\": \"Principal\",\n    \"conductor_tipo_doc\": \"1\",\n    \"conductor_num_doc\": \"44004400\",  // ← Usar DNI válido de test\n    \"conductor_licencia\": \"0001122020\",  // ← Usar licencia de test\n    \"conductor_nombres\": \"ROBERTO\",\n    \"conductor_apellidos\": \"RODRIGUEZ VALENCIA\",\n\n    // ← Cambio: vehículo principal y secundarios como arrays\n    \"vehiculo_placa\": \"VEH001\",\n    \"vehiculos_secundarios\": [\n      {\"placa\": \"VEH002\"},\n      {\"placa\": \"VEH003\"}\n    ],\n\n    \"detalles\": [\n      {\n        \"cantidad\": 200,\n        \"unidad\": \"NIU\",\n        \"descripcion\": \"CARGA INDUSTRIAL PESADA\",\n        \"codigo\": \"HEAVY001\",\n        \"peso_total\": 250.500\n      }\n    ],\n\n    \"usuario_creacion\": \"POSTMAN_TEST\"\n  }"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -585,7 +585,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -633,7 +633,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides?estado_sunat=PENDIENTE",
+							"raw": "{{base_url}}/v1/dispatch-guides?estado_sunat=PENDIENTE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -687,7 +687,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides?mod_traslado=02",
+							"raw": "{{base_url}}/v1/dispatch-guides?mod_traslado=02",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -741,7 +741,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/1",
+							"raw": "{{base_url}}/v1/dispatch-guides/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -818,7 +818,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/2/send-sunat",
+							"raw": "{{base_url}}/v1/dispatch-guides/2/send-sunat",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -887,7 +887,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/3/check-status",
+							"raw": "{{base_url}}/v1/dispatch-guides/3/check-status",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -970,7 +970,7 @@
 							"raw": "{\r\n    \"format\": \"A5\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/1/generate-pdf",
+							"raw": "{{base_url}}/v1/dispatch-guides/1/generate-pdf",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1023,7 +1023,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/dispatch-guides/{{dispatch_guide_private_id}}/download-xml",
+							"raw": "{{base_url}}/v1/dispatch-guides/{{dispatch_guide_private_id}}/download-xml",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1074,7 +1074,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/dispatch-guides/{{dispatch_guide_private_id}}/download-cdr",
+							"raw": "{{base_url}}/v1/dispatch-guides/{{dispatch_guide_private_id}}/download-cdr",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1136,7 +1136,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/1/download-pdf",
+							"raw": "{{base_url}}/v1/dispatch-guides/1/download-pdf",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1154,7 +1154,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8000/api/v1/dispatch-guides/1/generate-pdf",
+					"name": "{{base_url}}/v1/dispatch-guides/1/generate-pdf",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -1162,7 +1162,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/dispatch-guides/1/generate-pdf",
+							"raw": "{{base_url}}/v1/dispatch-guides/1/generate-pdf",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1222,7 +1222,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"client_id\": 1,\n  \"serie\": \"T001\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"fecha_traslado\": \"2025-09-07\",\n  \n  \"cod_traslado\": \"01\",\n  \"des_traslado\": \"Venta\",\n  \"mod_traslado\": \"02\",\n  \"peso_total\": 30.0,\n  \"und_peso_total\": \"KGM\",\n  \"num_bultos\": 2,\n  \n  \"partida\": {\n    \"ubigeo\": \"150101\",\n    \"direccion\": \"ORIGEN\"\n  },\n  \"llegada\": {\n    \"ubigeo\": \"150203\",\n    \"direccion\": \"DESTINO\"\n  },\n  \n  \"vehiculo\": {\n    \"placa_principal\": \"ABC123\"\n  },\n  \n  \"detalles\": [\n    {\n      \"cantidad\": 1,\n      \"unidad\": \"NIU\",\n      \"descripcion\": \"PRODUCTO\",\n      \"codigo\": \"PROD001\",\n      \"peso_total\": 30.0\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1272,7 +1272,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"client_id\": 1,\n  \"serie\": \"T001\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"fecha_traslado\": \"2025-09-07\",\n  \n  \"cod_traslado\": \"01\",\n  \"des_traslado\": \"Venta\",\n  \"mod_traslado\": \"01\",\n  \"peso_total\": 30.0,\n  \"und_peso_total\": \"KGM\",\n  \"num_bultos\": 2,\n  \n  \"partida\": {\n    \"ubigeo\": \"150101\",\n    \"direccion\": \"ORIGEN\"\n  },\n  \"llegada\": {\n    \"ubigeo\": \"150203\",\n    \"direccion\": \"DESTINO\"\n  },\n  \n  \"vehiculo\": {\n    \"placa_principal\": \"ABC123\"\n  },\n  \n  \"detalles\": [\n    {\n      \"cantidad\": 1,\n      \"unidad\": \"NIU\",\n      \"descripcion\": \"PRODUCTO\",\n      \"codigo\": \"PROD001\",\n      \"peso_total\": 30.0\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/dispatch-guides",
+							"raw": "{{base_url}}/v1/dispatch-guides",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1315,7 +1315,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/dispatch-guides/99999",
+							"raw": "{{base_url}}/v1/dispatch-guides/99999",
 							"host": [
 								"{{base_url}}"
 							],

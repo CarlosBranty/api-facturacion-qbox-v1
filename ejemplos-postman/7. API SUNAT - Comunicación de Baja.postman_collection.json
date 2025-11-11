@@ -24,7 +24,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents/available-documents?company_id=1&branch_id=1&fecha_referencia=2025-09-06",
+					"raw": "{{base_url}}/v1/voided-documents/available-documents?company_id=1&branch_id=1&fecha_referencia=2025-09-06",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +69,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/available-documents?company_id=1&branch_id=1&fecha_referencia=2025-09-06",
+							"raw": "{{base_url}}/v1/voided-documents/available-documents?company_id=1&branch_id=1&fecha_referencia=2025-09-06",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -133,7 +133,7 @@
 					"raw": "{\n  \"company_id\": 2,\n  \"branch_id\": 2,\n  \"fecha_referencia\": \"2025-09-06\",\n  \"motivo_baja\": \"ERROR EN CÁLCULO DE IGV - DOCUMENTO NO ENTREGADO AL CLIENTE\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error en aplicación de IGV por tipo de afectación incorrecta\"\n    }\n  ],\n  \"usuario_creacion\": \"admin\",\n  \"ubl_version\": \"2.0\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents",
+					"raw": "{{base_url}}/v1/voided-documents",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,7 +163,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-06\",\n  \"motivo_baja\": \"ERROR EN CÁLCULO DE IGV - DOCUMENTO NO ENTREGADO AL CLIENTE\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error en aplicación de IGV por tipo de afectación incorrecta\"\n    }\n  ],\n  \"usuario_creacion\": \"admin\"\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents",
+							"raw": "{{base_url}}/v1/voided-documents",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -207,7 +207,7 @@
 					"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-05\",\n  \"motivo_baja\": \"DATOS INCORRECTOS DEL CLIENTE - DOCUMENTOS NO ENTREGADOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00005678\",\n      \"motivo_especifico\": \"Cliente incorrecto - DNI errado en sistema\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00005679\",\n      \"motivo_especifico\": \"Cliente incorrecto - Nombre mal registrado\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B002\",\n      \"correlativo\": \"00001234\",\n      \"motivo_especifico\": \"Dirección del cliente incorrecta - no coincide con base de datos\"\n    }\n  ],\n  \"usuario_creacion\": \"vendedor01\",\n  \"ubl_version\": \"2.1\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents",
+					"raw": "{{base_url}}/v1/voided-documents",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -237,7 +237,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-05\",\n  \"motivo_baja\": \"DATOS INCORRECTOS DEL CLIENTE - DOCUMENTOS NO ENTREGADOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00005678\",\n      \"motivo_especifico\": \"Cliente incorrecto - DNI errado en sistema\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00005679\",\n      \"motivo_especifico\": \"Cliente incorrecto - Nombre mal registrado\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B002\",\n      \"correlativo\": \"00001234\",\n      \"motivo_especifico\": \"Dirección del cliente incorrecta - no coincide con base de datos\"\n    }\n  ],\n  \"usuario_creacion\": \"vendedor01\"\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents",
+							"raw": "{{base_url}}/v1/voided-documents",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -281,7 +281,7 @@
 					"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-04\",\n  \"motivo_baja\": \"DOCUMENTOS EMITIDOS POR ERROR OPERATIVO\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000456\",\n      \"motivo_especifico\": \"Factura duplicada por error de sistema - ya existe F001-00000455\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00006789\",\n      \"motivo_especifico\": \"Boleta emitida por error - cliente canceló la compra antes de la emisión\"\n    },\n    {\n      \"tipo_documento\": \"07\",\n      \"serie\": \"FC01\",\n      \"correlativo\": \"00000089\",\n      \"motivo_especifico\": \"Nota de crédito emitida sin sustento válido - no aplica devolución\"\n    }\n  ],\n  \"usuario_creacion\": \"supervisor\",\n  \"ubl_version\": \"2.0\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents",
+					"raw": "{{base_url}}/v1/voided-documents",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -311,7 +311,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-04\",\n  \"motivo_baja\": \"DOCUMENTOS EMITIDOS POR ERROR OPERATIVO\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000456\",\n      \"motivo_especifico\": \"Factura duplicada por error de sistema\"\n    },\n    {\n      \"tipo_documento\": \"03\",\n      \"serie\": \"B001\",\n      \"correlativo\": \"00006789\",\n      \"motivo_especifico\": \"Boleta emitida por error - cliente canceló la compra\"\n    },\n    {\n      \"tipo_documento\": \"07\",\n      \"serie\": \"FC01\",\n      \"correlativo\": \"00000089\",\n      \"motivo_especifico\": \"Nota de crédito emitida sin sustento válido\"\n    }\n  ],\n  \"usuario_creacion\": \"supervisor\"\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents",
+							"raw": "{{base_url}}/v1/voided-documents",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -361,7 +361,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents/1/send-sunat",
+					"raw": "{{base_url}}/v1/voided-documents/1/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -388,7 +388,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/5/send-sunat",
+							"raw": "{{base_url}}/v1/voided-documents/5/send-sunat",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -440,7 +440,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents/1/check-status",
+					"raw": "{{base_url}}/v1/voided-documents/1/check-status",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -467,7 +467,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/5/check-status",
+							"raw": "{{base_url}}/v1/voided-documents/5/check-status",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -502,7 +502,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/6/check-status",
+							"raw": "{{base_url}}/v1/voided-documents/6/check-status",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -537,7 +537,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/7/check-status",
+							"raw": "{{base_url}}/v1/voided-documents/7/check-status",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -575,7 +575,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents?company_id=1&estado_sunat=ACEPTADO&per_page=10",
+					"raw": "{{base_url}}/v1/voided-documents?company_id=1&estado_sunat=ACEPTADO&per_page=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -634,7 +634,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents?company_id=1&estado_sunat=ACEPTADO&per_page=10",
+							"raw": "{{base_url}}/v1/voided-documents?company_id=1&estado_sunat=ACEPTADO&per_page=10",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -669,7 +669,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n  \"success\": true,\n  \"data\": {\n    \"current_page\": 1,\n    \"data\": [\n      {\n        \"id\": 5,\n        \"identificador\": \"20123456789-RA-20250906-001\",\n        \"correlativo\": \"001\",\n        \"fecha_emision\": \"2025-09-06\",\n        \"fecha_referencia\": \"2025-09-06\",\n        \"total_documentos\": 1,\n        \"estado_sunat\": \"ACEPTADO\",\n        \"motivo_baja\": \"ERROR EN CÁLCULO DE IGV - DOCUMENTO NO ENTREGADO AL CLIENTE\",\n        \"usuario_creacion\": \"admin\",\n        \"created_at\": \"2025-09-06T10:30:00.000000Z\",\n        \"company\": {\n          \"ruc\": \"20123456789\",\n          \"razon_social\": \"EMPRESA DE PRUEBAS GREENTER S.A.C.\"\n        },\n        \"branch\": {\n          \"codigo\": \"0001\",\n          \"nombre\": \"SUCURSAL PRINCIPAL\"\n        }\n      }\n    ],\n    \"first_page_url\": \"{{BASE_URL}}/api/v1/voided-documents?page=1\",\n    \"from\": 1,\n    \"last_page\": 1,\n    \"last_page_url\": \"{{BASE_URL}}/api/v1/voided-documents?page=1\",\n    \"links\": [\n      {\n        \"url\": null,\n        \"label\": \"&laquo; Previous\",\n        \"active\": false\n      },\n      {\n        \"url\": \"{{BASE_URL}}/api/v1/voided-documents?page=1\",\n        \"label\": \"1\",\n        \"active\": true\n      },\n      {\n        \"url\": null,\n        \"label\": \"Next &raquo;\",\n        \"active\": false\n      }\n    ],\n    \"next_page_url\": null,\n    \"path\": \"{{BASE_URL}}/api/v1/voided-documents\",\n    \"per_page\": 10,\n    \"prev_page_url\": null,\n    \"to\": 1,\n    \"total\": 1\n  },\n  \"message\": \"Comunicaciones de baja obtenidas correctamente\"\n}"
+					"body": "{\n  \"success\": true,\n  \"data\": {\n    \"current_page\": 1,\n    \"data\": [\n      {\n        \"id\": 5,\n        \"identificador\": \"20123456789-RA-20250906-001\",\n        \"correlativo\": \"001\",\n        \"fecha_emision\": \"2025-09-06\",\n        \"fecha_referencia\": \"2025-09-06\",\n        \"total_documentos\": 1,\n        \"estado_sunat\": \"ACEPTADO\",\n        \"motivo_baja\": \"ERROR EN CÁLCULO DE IGV - DOCUMENTO NO ENTREGADO AL CLIENTE\",\n        \"usuario_creacion\": \"admin\",\n        \"created_at\": \"2025-09-06T10:30:00.000000Z\",\n        \"company\": {\n          \"ruc\": \"20123456789\",\n          \"razon_social\": \"EMPRESA DE PRUEBAS GREENTER S.A.C.\"\n        },\n        \"branch\": {\n          \"codigo\": \"0001\",\n          \"nombre\": \"SUCURSAL PRINCIPAL\"\n        }\n      }\n    ],\n    \"first_page_url\": \"{{base_url}}/v1/voided-documents?page=1\",\n    \"from\": 1,\n    \"last_page\": 1,\n    \"last_page_url\": \"{{base_url}}/v1/voided-documents?page=1\",\n    \"links\": [\n      {\n        \"url\": null,\n        \"label\": \"&laquo; Previous\",\n        \"active\": false\n      },\n      {\n        \"url\": \"{{base_url}}/v1/voided-documents?page=1\",\n        \"label\": \"1\",\n        \"active\": true\n      },\n      {\n        \"url\": null,\n        \"label\": \"Next &raquo;\",\n        \"active\": false\n      }\n    ],\n    \"next_page_url\": null,\n    \"path\": \"{{base_url}}/v1/voided-documents\",\n    \"per_page\": 10,\n    \"prev_page_url\": null,\n    \"to\": 1,\n    \"total\": 1\n  },\n  \"message\": \"Comunicaciones de baja obtenidas correctamente\"\n}"
 				}
 			]
 		},
@@ -694,7 +694,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/voided-documents/1",
+					"raw": "{{base_url}}/v1/voided-documents/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -716,7 +716,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/5",
+							"raw": "{{base_url}}/v1/voided-documents/5",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -748,7 +748,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/voided-documents/5/download-xml",
+					"raw": "{{base_url}}/v1/voided-documents/5/download-xml",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -769,7 +769,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/5/download-xml",
+							"raw": "{{base_url}}/v1/voided-documents/5/download-xml",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -806,7 +806,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/voided-documents/5/download-cdr",
+					"raw": "{{base_url}}/v1/voided-documents/5/download-cdr",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -827,7 +827,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/5/download-cdr",
+							"raw": "{{base_url}}/v1/voided-documents/5/download-cdr",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -862,7 +862,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents/7/download-cdr",
+							"raw": "{{base_url}}/v1/voided-documents/7/download-cdr",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -908,7 +908,7 @@
 					"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-08-28\",\n  \"motivo_baja\": \"ERROR EN DATOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000999\",\n      \"motivo_especifico\": \"Error en datos\"\n    }\n  ]\n}"
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/voided-documents",
+					"raw": "{{base_url}}/v1/voided-documents",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -936,7 +936,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-08-28\",\n  \"motivo_baja\": \"ERROR EN DATOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000999\",\n      \"motivo_especifico\": \"Error en datos\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents",
+							"raw": "{{base_url}}/v1/voided-documents",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -980,7 +980,7 @@
 					"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-06\",\n  \"motivo_baja\": \"ERROR EN DATOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error 1\"\n    },\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error 2\"\n    }\n  ]\n}"
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/voided-documents",
+					"raw": "{{base_url}}/v1/voided-documents",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -1008,7 +1008,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"fecha_referencia\": \"2025-09-06\",\n  \"motivo_baja\": \"ERROR EN DATOS\",\n  \"detalles\": [\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error 1\"\n    },\n    {\n      \"tipo_documento\": \"01\",\n      \"serie\": \"F001\",\n      \"correlativo\": \"00000123\",\n      \"motivo_especifico\": \"Error 2\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/voided-documents",
+							"raw": "{{base_url}}/v1/voided-documents",
 							"host": [
 								"{{BASE_URL}}"
 							],

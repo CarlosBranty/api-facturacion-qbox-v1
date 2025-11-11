@@ -37,7 +37,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"host": [
 						"{{base_url}}"
 					],
@@ -81,7 +81,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"host": [
 						"{{base_url}}"
 					],
@@ -125,7 +125,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -171,7 +171,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -212,7 +212,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -253,7 +253,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -294,7 +294,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -335,7 +335,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -376,7 +376,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -417,7 +417,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -458,7 +458,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -499,7 +499,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -540,7 +540,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -581,7 +581,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -622,7 +622,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -663,7 +663,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -704,7 +704,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -745,7 +745,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -786,7 +786,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas",
+					"raw": "{{base_url}}/v1/boletas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -832,7 +832,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/{{boletaId}}/generate-pdf",
+					"raw": "{{base_url}}/v1/invoices/{{boletaId}}/generate-pdf",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -875,7 +875,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas/{{boletaId}}/generate-pdf",
+					"raw": "{{base_url}}/v1/boletas/{{boletaId}}/generate-pdf",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -914,7 +914,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/{{boletaId}}/download-pdf?format=A4",
+					"raw": "{{base_url}}/v1/invoices/{{boletaId}}/download-pdf?format=A4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -968,7 +968,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas/create-daily-summary",
+					"raw": "{{base_url}}/v1/boletas/create-daily-summary",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1006,7 +1006,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/daily-summaries/1/send-sunat",
+					"raw": "{{base_url}}/v1/daily-summaries/1/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1045,7 +1045,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/daily-summaries/1/check-status",
+					"raw": "{{base_url}}/v1/daily-summaries/1/check-status",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1074,7 +1074,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/boletas?company_id=1&branch_id=1&per_page=20",
+					"raw": "{{base_url}}/v1/boletas?company_id=1&branch_id=1&per_page=20",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1115,7 +1115,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/pdf/formats",
+					"raw": "{{base_url}}/v1/pdf/formats",
 					"protocol": "http",
 					"host": [
 						"localhost"

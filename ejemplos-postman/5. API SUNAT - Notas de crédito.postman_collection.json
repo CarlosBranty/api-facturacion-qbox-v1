@@ -33,7 +33,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/credit-notes/catalogs/motivos",
+							"raw": "{{base_url}}/v1/credit-notes/catalogs/motivos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -95,7 +95,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-15\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-111\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION POR ITEM\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\",\n    \"direccion\": \"AV. EJEMPLO 123\",\n    \"ubigeo\": \"150101\",\n    \"distrito\": \"LIMA\",\n    \"provincia\": \"LIMA\",\n    \"departamento\": \"LIMA\"\n  },\n  \"guias\": [\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"0001-213\"\n    }\n  ],\n  \"detalles\": [\n    {\n      \"codigo\": \"C023\",\n      \"descripcion\": \"PROD 1\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    },\n    {\n      \"codigo\": \"C02\",\n      \"descripcion\": \"PROD 2\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ],\n  \"leyendas\": [\n    {\n      \"code\": \"1000\",\n      \"value\": \"SON DOSCIENTOS TREINTA Y SEIS CON 00/100 SOLES\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -130,7 +130,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"BB01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"03\",\n  \"num_doc_afectado\": \"B001-12\",\n  \"cod_motivo\": \"01\",\n  \"des_motivo\": \"ANULACION DE LA OPERACION\",\n  \"client\": {\n    \"tipo_documento\": \"1\",\n    \"numero_documento\": \"12345678\",\n    \"razon_social\": \"CLIENTE NATURAL\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"C023\",\n      \"descripcion\": \"PROD 1\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    },\n    {\n      \"codigo\": \"C02\",\n      \"descripcion\": \"PROD 2\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -158,7 +158,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"forma_pago_tipo\": \"Credito\",\n  \"forma_pago_cuotas\": [\n    {\n      \"monto\": 236.00,\n      \"fecha_pago\": \"2025-09-11\"\n    }\n  ],\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-111\",\n  \"cod_motivo\": \"13\",\n  \"des_motivo\": \"AJUSTES - MONTOS Y/O FECHAS DE PAGO\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"guias\": [\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"0001-213\"\n    }\n  ],\n  \"detalles\": [\n    {\n      \"codigo\": \"C023\",\n      \"descripcion\": \"PROD 1\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    },\n    {\n      \"codigo\": \"C02\",\n      \"descripcion\": \"PROD 2\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -191,7 +191,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000001\",\n  \"cod_motivo\": \"01\",\n  \"des_motivo\": \"ANULACION DE LA OPERACION\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"ANULADO\",\n      \"descripcion\": \"OPERACION ANULADA COMPLETAMENTE\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 100.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -219,7 +219,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000002\",\n  \"cod_motivo\": \"02\",\n  \"des_motivo\": \"ANULACION POR ERROR EN EL RUC\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"CORR-RUC\",\n      \"descripcion\": \"CORRECCION POR RUC INCORRECTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 100.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -247,7 +247,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000003\",\n  \"cod_motivo\": \"03\",\n  \"des_motivo\": \"CORRECCION POR ERROR EN LA DESCRIPCION\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"PROD001\",\n      \"descripcion\": \"DESCRIPCION CORREGIDA DEL PRODUCTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -275,7 +275,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000004\",\n  \"cod_motivo\": \"04\",\n  \"des_motivo\": \"DESCUENTO GLOBAL\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"DESC-GLOBAL\",\n      \"descripcion\": \"DESCUENTO APLICADO GLOBALMENTE\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 20.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -303,7 +303,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000005\",\n  \"cod_motivo\": \"05\",\n  \"des_motivo\": \"DESCUENTO POR ITEM\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"PROD001\",\n      \"descripcion\": \"DESCUENTO EN PRODUCTO ESPECIFICO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 15.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -331,7 +331,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000006\",\n  \"cod_motivo\": \"06\",\n  \"des_motivo\": \"DEVOLUCION TOTAL\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"guias\": [\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"G001-001\"\n    },\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"G001-002\"\n    }\n  ],\n  \"detalles\": [\n    {\n      \"codigo\": \"DEVUELTO\",\n      \"descripcion\": \"PRODUCTO DEVUELTO COMPLETAMENTE\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 3,\n      \"mto_valor_unitario\": 33.33,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -359,7 +359,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000007\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION POR ITEM\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"guias\": [\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"0001-213\"\n    }\n  ],\n  \"detalles\": [\n    {\n      \"codigo\": \"C023\",\n      \"descripcion\": \"PROD 1 DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -387,7 +387,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000008\",\n  \"cod_motivo\": \"08\",\n  \"des_motivo\": \"BONIFICACION\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"BONUS\",\n      \"descripcion\": \"BONIFICACION AL CLIENTE\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 25.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -415,7 +415,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000009\",\n  \"cod_motivo\": \"09\",\n  \"des_motivo\": \"DISMINUCION EN EL VALOR\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"ADJUST\",\n      \"descripcion\": \"AJUSTE DE VALOR POR CALIDAD\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 10.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -443,7 +443,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000010\",\n  \"cod_motivo\": \"10\",\n  \"des_motivo\": \"OTROS CONCEPTOS\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"OTHER\",\n      \"descripcion\": \"CONCEPTO ESPECIAL DE AJUSTE\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 30.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -471,7 +471,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"USD\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000011\",\n  \"cod_motivo\": \"11\",\n  \"des_motivo\": \"AJUSTES DE OPERACIONES DE EXPORTACION\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\",\n    \"pais\": \"US\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"EXP001\",\n      \"descripcion\": \"PRODUCTO DE EXPORTACION AJUSTADO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 10,\n      \"mto_valor_unitario\": 15.00,\n      \"porcentaje_igv\": 0.00,\n      \"tip_afe_igv\": \"40\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -499,7 +499,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000012\",\n  \"cod_motivo\": \"12\",\n  \"des_motivo\": \"AJUSTES AFECTOS AL IVAP\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"IVAP001\",\n      \"descripcion\": \"AJUSTE PARA OPERACION IVAP\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 100.00,\n      \"porcentaje_igv\": 2.00,\n      \"tip_afe_igv\": \"17\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -527,7 +527,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"forma_pago_tipo\": \"Credito\",\n  \"forma_pago_cuotas\": [\n    {\n      \"monto\": 59.00,\n      \"fecha_pago\": \"2025-10-06\"\n    },\n    {\n      \"monto\": 59.00,\n      \"fecha_pago\": \"2025-11-06\"\n    }\n  ],\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-000013\",\n  \"cod_motivo\": \"13\",\n  \"des_motivo\": \"AJUSTES - MONTOS Y/O FECHAS DE PAGO\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"AJUSTE-PAGO\",\n      \"descripcion\": \"AJUSTE EN FECHAS Y MONTOS DE PAGO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 25.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -560,7 +560,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-EXO001\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION POR ITEM - OPERACION EXONERADA\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"EXON001\",\n      \"descripcion\": \"PRODUCTO EXONERADO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 5,\n      \"mto_valor_unitario\": 20.00,\n      \"porcentaje_igv\": 0.00,\n      \"tip_afe_igv\": \"20\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -588,7 +588,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-INA001\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION POR ITEM - OPERACION INAFECTA\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"INAF001\",\n      \"descripcion\": \"PRODUCTO INAFECTO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 3,\n      \"mto_valor_unitario\": 25.00,\n      \"porcentaje_igv\": 0.00,\n      \"tip_afe_igv\": \"30\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -616,7 +616,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-ISC001\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION DE PRODUCTOS CON ISC E ICBPER\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"CIGA001\",\n      \"descripcion\": \"CIGARRILLOS DEVUELTOS\",\n      \"unidad\": \"PAQ\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 10.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\",\n      \"isc\": 3.00,\n      \"tip_sis_isc\": \"01\",\n      \"mto_base_isc\": 10.00\n    },\n    {\n      \"codigo\": \"BOLS001\",\n      \"descripcion\": \"BOLSAS PLASTICAS DEVUELTAS\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 100,\n      \"mto_valor_unitario\": 0.10,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\",\n      \"icbper\": 10.00,\n      \"factor_icbper\": 100\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -644,7 +644,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-MG001\",\n  \"cod_motivo\": \"06\",\n  \"des_motivo\": \"DEVOLUCION TOTAL CON MULTIPLES GUIAS\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"guias\": [\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"T001-000001\"\n    },\n    {\n      \"tipo_doc\": \"09\",\n      \"nro_doc\": \"T001-000002\"\n    },\n    {\n      \"tipo_doc\": \"31\",\n      \"nro_doc\": \"GRE-001\"\n    }\n  ],\n  \"detalles\": [\n    {\n      \"codigo\": \"LOTE001\",\n      \"descripcion\": \"LOTE COMPLETO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 50,\n      \"mto_valor_unitario\": 5.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -672,7 +672,7 @@
 							"raw": "{\n  \"company_id\": 1,\n  \"branch_id\": 1,\n  \"serie\": \"FF01\",\n  \"fecha_emision\": \"2025-09-06\",\n  \"moneda\": \"PEN\",\n  \"tipo_doc_afectado\": \"01\",\n  \"num_doc_afectado\": \"F001-MIX001\",\n  \"cod_motivo\": \"07\",\n  \"des_motivo\": \"DEVOLUCION MIXTA - GRAVADO, EXONERADO E INAFECTO\",\n  \"client\": {\n    \"tipo_documento\": \"6\",\n    \"numero_documento\": \"20123456789\",\n    \"razon_social\": \"EMPRESA DE PRUEBA SAC\"\n  },\n  \"detalles\": [\n    {\n      \"codigo\": \"GRAV001\",\n      \"descripcion\": \"PRODUCTO GRAVADO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 2,\n      \"mto_valor_unitario\": 50.00,\n      \"porcentaje_igv\": 18.00,\n      \"tip_afe_igv\": \"10\"\n    },\n    {\n      \"codigo\": \"EXON001\",\n      \"descripcion\": \"PRODUCTO EXONERADO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 3,\n      \"mto_valor_unitario\": 30.00,\n      \"porcentaje_igv\": 0.00,\n      \"tip_afe_igv\": \"20\"\n    },\n    {\n      \"codigo\": \"INAF001\",\n      \"descripcion\": \"PRODUCTO INAFECTO DEVUELTO\",\n      \"unidad\": \"NIU\",\n      \"cantidad\": 1,\n      \"mto_valor_unitario\": 25.00,\n      \"porcentaje_igv\": 0.00,\n      \"tip_afe_igv\": \"30\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes",
+							"raw": "{{base_url}}/v1/credit-notes",
 							"host": [
 								"{{base_url}}"
 							],
@@ -696,7 +696,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes?company_id=1&per_page=15",
+							"raw": "{{base_url}}/v1/credit-notes?company_id=1&per_page=15",
 							"host": [
 								"{{base_url}}"
 							],
@@ -725,7 +725,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -745,7 +745,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes?company_id=1&estado_sunat=PENDIENTE",
+							"raw": "{{base_url}}/v1/credit-notes?company_id=1&estado_sunat=PENDIENTE",
 							"host": [
 								"{{base_url}}"
 							],
@@ -774,7 +774,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes?company_id=1&tipo_doc_afectado=01",
+							"raw": "{{base_url}}/v1/credit-notes?company_id=1&tipo_doc_afectado=01",
 							"host": [
 								"{{base_url}}"
 							],
@@ -803,7 +803,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes?company_id=1&fecha_desde=2025-09-01&fecha_hasta=2025-09-30",
+							"raw": "{{base_url}}/v1/credit-notes?company_id=1&fecha_desde=2025-09-01&fecha_hasta=2025-09-30",
 							"host": [
 								"{{base_url}}"
 							],
@@ -872,7 +872,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/credit-notes/2/send-sunat",
+							"raw": "{{base_url}}/v1/credit-notes/2/send-sunat",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -909,7 +909,7 @@
 							"raw": "{\n  \"formato\": \"a4\",\n  \"generar_qr\": true\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/generate-pdf",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/generate-pdf",
 							"host": [
 								"{{base_url}}"
 							],
@@ -939,7 +939,7 @@
 							"raw": "{\n  \"formato\": \"a5\",\n  \"generar_qr\": true\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/generate-pdf",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/generate-pdf",
 							"host": [
 								"{{base_url}}"
 							],
@@ -969,7 +969,7 @@
 							"raw": "{\n  \"formato\": \"80mm\",\n  \"generar_qr\": false\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/generate-pdf",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/generate-pdf",
 							"host": [
 								"{{base_url}}"
 							],
@@ -999,7 +999,7 @@
 							"raw": "{\n  \"formato\": \"50mm\",\n  \"generar_qr\": false\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/generate-pdf",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/generate-pdf",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1020,7 +1020,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/download-xml",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/download-xml",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1041,7 +1041,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/download-cdr",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/download-cdr",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1062,7 +1062,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/credit-notes/{{credit_note_id}}/download-pdf",
+							"raw": "{{base_url}}/v1/credit-notes/{{credit_note_id}}/download-pdf",
 							"host": [
 								"{{base_url}}"
 							],

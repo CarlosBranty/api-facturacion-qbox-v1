@@ -394,7 +394,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": {{branch_id}},\n    \"serie\": \"F001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"tipo_operacion\": \"0101\",\n    \"metodo_envio\": \"individual\",\n    \"forma_pago_tipo\": \"Contado\",\n    \"client\": {\n        \"tipo_documento\": \"6\",\n        \"numero_documento\": \"{{client_ruc_id}}\",\n        \"razon_social\": \"CLIENTE DEMO SAC\"\n    },\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD001\",\n            \"descripcion\": \"Producto de prueba\",\n            \"unidad\": \"NIU\",\n            \"cantidad\": 1,\n            \"mto_valor_unitario\": 100.00,\n            \"porcentaje_igv\": 18,\n            \"tip_afe_igv\": \"10\"\n        }\n    ]\n}"
+							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": {{branch_id}},\n    \"serie\": \"F001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"tipo_operacion\": \"0101\",\n    \"metodo_envio\": \"individual\",\n    \"forma_pago_tipo\": \"Contado\",\n    \"client\": {\n        \"tipo_documento\": \"6\",\n        \"numero_documento\": \"20987654321\",\n        \"razon_social\": \"CLIENTE DEMO SAC\",\n        \"nombre_comercial\": \"Cliente Demo\",\n        \"direccion\": \"Av. Ejemplo 123\",\n        \"ubigeo\": \"150101\",\n        \"distrito\": \"Lima\",\n        \"provincia\": \"Lima\",\n        \"departamento\": \"Lima\"\n    },\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD001\",\n            \"descripcion\": \"Producto de prueba para factura\",\n            \"unidad\": \"NIU\",\n            \"cantidad\": 1,\n            \"mto_valor_unitario\": 100.00,\n            \"porcentaje_igv\": 18,\n            \"tip_afe_igv\": \"10\",\n            \"codigo_producto_sunat\": \"43211507\"\n        }\n    ],\n    \"usuario_creacion\": \"API_TOKEN_TEST\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/v1/invoices",
@@ -521,7 +521,7 @@
 								"companies"
 							]
 						},
-						"description": "Crea una nueva empresa con datos básicos. Usar modo_produccion: false para testing.\n\n⚡ **IMPORTANTE**: Al crear una empresa, el sistema automáticamente crea un token de API por defecto con:\n- Nombre: \"Token Principal - {Razón Social}\"\n- Permisos: Todos los permisos (*)\n- Sin expiración\n- Estado: Activo\n\nPuedes obtener este token listando los tokens de la empresa con: GET /api/v1/companies/{company_id}/tokens\n\nVer colección \"9. API SUNAT - Tokens y Suscripciones\" para más detalles sobre gestión de tokens."
+						"description": "Crea una nueva empresa con datos básicos. Usar modo_produccion: false para testing.\n\n⚡ **IMPORTANTE**: Al crear una empresa, el sistema automáticamente crea un token de API por defecto con:\n- Nombre: \"Token Principal - {Razón Social}\"\n- Permisos: Todos los permisos (*)\n- Sin expiración\n- Estado: Activo\n\nPuedes obtener este token listando los tokens de la empresa con: GET /v1/companies/{company_id}/tokens\n\nVer colección \"9. API SUNAT - Tokens y Suscripciones\" para más detalles sobre gestión de tokens."
 					},
 					"response": []
 				},

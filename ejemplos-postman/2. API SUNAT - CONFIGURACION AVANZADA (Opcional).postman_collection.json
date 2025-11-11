@@ -622,7 +622,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:8000/api/v1",
+			"value": "{{base_url}}/v1",
 			"type": "string"
 		},
 		{

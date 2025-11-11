@@ -37,7 +37,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices",
+					"raw": "{{base_url}}/v1/invoices",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -83,7 +83,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/8/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/8/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -131,7 +131,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/9/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/9/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -179,7 +179,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/10/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/10/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -227,7 +227,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/11/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/11/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -275,7 +275,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/12/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/12/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -323,7 +323,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/13/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/13/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -371,7 +371,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/14/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/14/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -419,7 +419,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices",
+					"raw": "{{base_url}}/v1/invoices",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -465,7 +465,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/16/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/16/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -513,7 +513,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/17/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/17/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -561,7 +561,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/18/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/18/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -609,7 +609,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/19/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/19/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -657,7 +657,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/3/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/3/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -700,7 +700,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/23/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/23/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -743,7 +743,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/25/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/25/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -786,7 +786,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/26/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/26/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -829,7 +829,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/94/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/94/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -872,7 +872,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/28/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/28/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -915,7 +915,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/36/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/36/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -958,7 +958,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/37/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/37/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1001,7 +1001,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/40/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/40/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1044,7 +1044,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/41/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/41/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1087,7 +1087,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/retentions/2/send-sunat",
+					"raw": "{{base_url}}/v1/retentions/2/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1130,7 +1130,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/43/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/43/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1173,7 +1173,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/47/sent-sunat",
+					"raw": "{{base_url}}/v1/invoices/47/sent-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1216,7 +1216,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/46/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/46/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1264,7 +1264,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/6/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/6/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1312,7 +1312,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/7/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/7/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1355,7 +1355,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/72/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/72/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1398,7 +1398,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/55/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/55/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1441,7 +1441,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/73/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/73/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1484,7 +1484,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/74/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/74/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1532,7 +1532,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/20/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/20/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1575,7 +1575,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/77/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/77/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1623,7 +1623,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/v1/invoices/3/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/3/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1666,7 +1666,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/84/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/84/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1709,7 +1709,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/86/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/86/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1752,7 +1752,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/88/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/88/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1795,7 +1795,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/89/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/89/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1838,7 +1838,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/90/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/90/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1881,7 +1881,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/invoices/93/send-sunat",
+					"raw": "{{base_url}}/v1/invoices/93/send-sunat",
 					"protocol": "http",
 					"host": [
 						"localhost"

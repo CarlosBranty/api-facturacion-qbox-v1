@@ -39,7 +39,14 @@ class AuthenticateApiToken
             // Es un token de Sanctum - autenticar al usuario
             $user = $sanctumToken->tokenable;
             if ($user) {
+                // Establecer usuario en el guard de Sanctum
                 Auth::guard('sanctum')->setUser($user);
+                
+                // También establecer en el request para que $request->user() funcione
+                $request->setUserResolver(function () use ($user) {
+                    return $user;
+                });
+                
                 return $next($request);
             }
         }
