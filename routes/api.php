@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\ConsultaCpeController;
 use App\Http\Controllers\Api\SetupController;
 use App\Http\Controllers\Api\UbigeoController;
 use App\Http\Controllers\Api\ConsultaCpeControllerMejorado;
+use App\Http\Controllers\Api\CompanyTokenController;
+use App\Http\Controllers\Api\SubscriptionController;
 
 // ========================
 // RUTAS PÚBLICAS (SIN AUTENTICACIÓN)
@@ -44,9 +46,20 @@ Route::post('/auth/initialize', [AuthController::class, 'initialize']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 // ========================
-// RUTAS PROTEGIDAS (CON AUTENTICACIÓN)
+// RUTAS PROTEGIDAS (CON AUTENTICACIÓN) - Compatibilidad sin prefijo v1
 // ========================
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+// Rutas de compatibilidad para mantener URLs anteriores
+Route::middleware(['api.token'])->group(function () {
+    Route::post('/auth/create-user', [AuthController::class, 'createUser']);
+    Route::get('/auth/me', [AuthController::class, 'me']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+});
+
+// ========================
+// RUTAS PROTEGIDAS (CON AUTENTICACIÓN) - Versión v1
+// ========================
+// Acepta tanto tokens de usuario (Sanctum) como tokens de empresa
+Route::prefix('v1')->middleware(['api.token'])->group(function () {
 
     // ========================
     // AUTENTICACIÓN Y USUARIO
@@ -87,6 +100,28 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('companies', CompanyController::class);
     Route::post('/companies/{company}/activate', [CompanyController::class, 'activate']);
     Route::post('/companies/{company}/toggle-production', [CompanyController::class, 'toggleProductionMode']);
+
+    // Tokens de API por empresa
+    Route::prefix('companies/{company_id}/tokens')->group(function () {
+        Route::get('/', [CompanyTokenController::class, 'index']);
+        Route::post('/', [CompanyTokenController::class, 'store']);
+        Route::get('/{token}', [CompanyTokenController::class, 'show']);
+        Route::put('/{token}', [CompanyTokenController::class, 'update']);
+        Route::delete('/{token}', [CompanyTokenController::class, 'destroy']);
+        Route::post('/{token}/regenerate', [CompanyTokenController::class, 'regenerate']);
+    });
+
+    // Suscripciones por empresa
+    Route::prefix('companies/{company_id}/subscriptions')->group(function () {
+        Route::get('/', [SubscriptionController::class, 'index']);
+        Route::post('/', [SubscriptionController::class, 'store']);
+        Route::get('/active', [SubscriptionController::class, 'active']);
+        Route::get('/{subscription}', [SubscriptionController::class, 'show']);
+        Route::put('/{subscription}', [SubscriptionController::class, 'update']);
+        Route::post('/{subscription}/activate', [SubscriptionController::class, 'activate']);
+        Route::post('/{subscription}/cancel', [SubscriptionController::class, 'cancel']);
+        Route::post('/{subscription}/renew', [SubscriptionController::class, 'renew']);
+    });
 
     // Configuraciones de empresas
     Route::prefix('companies/{company_id}/config')->group(function () {
@@ -295,4 +330,37 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         // Estadísticas de consultas
         Route::get('/estadisticas', [ConsultaCpeController::class, 'estadisticasConsultas']);
     });
+});
+
+// ========================
+// RUTAS CON TOKEN DE EMPRESA (ALTERNATIVA A SANCTUM)
+// ========================
+// Estas rutas permiten usar tokens de empresa directamente sin autenticación de usuario
+// Útil para integraciones desde otras aplicaciones
+Route::prefix('v1/company')->middleware('company.token')->group(function () {
+    // Las empresas pueden acceder a estas rutas usando su token de API
+    // El middleware AuthenticateCompanyToken ya valida el token y agrega $request->company
+    
+    // Ejemplo: Obtener información de la empresa autenticada
+    Route::get('/info', function (Request $request) {
+        $company = $request->attributes->get('company');
+        $token = $request->attributes->get('company_token');
+        
+        return response()->json([
+            'company' => [
+                'id' => $company->id,
+                'ruc' => $company->ruc,
+                'razon_social' => $company->razon_social,
+                'nombre_comercial' => $company->nombre_comercial,
+            ],
+            'token' => [
+                'name' => $token->name,
+                'abilities' => $token->abilities,
+            ]
+        ]);
+    });
+    
+    // Aquí puedes agregar más rutas que las empresas puedan usar con sus tokens
+    // Por ejemplo, crear facturas, boletas, etc.
+    // Nota: Deberás adaptar los controladores para usar $request->company en lugar de $request->user()->company
 });

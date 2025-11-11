@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\HandlesPdfGeneration;
+use App\Traits\GetsCompanyFromRequest;
 use App\Http\Requests\Boleta\CreateDailySummaryRequest;
 use App\Http\Requests\Boleta\GetBoletasPendingRequest;
 use App\Http\Requests\Boleta\IndexBoletaRequest;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BoletaController extends Controller
 {
-    use HandlesPdfGeneration;
+    use HandlesPdfGeneration, GetsCompanyFromRequest;
 
     protected DocumentService $documentService;
     protected FileService $fileService;
@@ -37,6 +38,20 @@ class BoletaController extends Controller
     {
         try {
             $query = Boleta::with(['company', 'branch', 'client']);
+            
+            // Si se proporciona company_id, validar acceso
+            if ($request->has('company_id')) {
+                if (!$this->canAccessCompany($request, $request->company_id)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No tienes acceso a esta empresa'
+                    ], 403);
+                }
+            } else {
+                // Si no se proporciona, filtrar por empresa del request (si aplica)
+                $this->filterByRequestCompany($query, $request);
+            }
+            
             $this->applyFilters($query, $request);
             
             $perPage = $request->get('per_page', 15);
@@ -60,6 +75,27 @@ class BoletaController extends Controller
     {
         try {
             $validated = $request->validated();
+
+            // Si no se proporciona company_id, usar la empresa del request
+            if (!isset($validated['company_id'])) {
+                $company = $this->getCompanyFromRequest($request);
+                if (!$company) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No se pudo determinar la empresa. Proporciona company_id o usa un token de empresa.'
+                    ], 400);
+                }
+                $validated['company_id'] = $company->id;
+            } else {
+                // Validar acceso a la empresa especificada
+                if (!$this->canAccessCompany($request, $validated['company_id'])) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No tienes acceso a esta empresa'
+                    ], 403);
+                }
+            }
+
             $boleta = $this->documentService->createBoleta($validated);
 
             return response()->json([
@@ -76,10 +112,18 @@ class BoletaController extends Controller
     /**
      * Obtener boleta específica
      */
-    public function show(string $id): JsonResponse
+    public function show(Request $request, string $id): JsonResponse
     {
         try {
             $boleta = Boleta::with(['company', 'branch', 'client'])->findOrFail($id);
+
+            // Validar acceso a la empresa de la boleta
+            if (!$this->canAccessCompany($request, $boleta->company_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No tienes acceso a esta boleta'
+                ], 403);
+            }
             
             return response()->json([
                 'success' => true,
@@ -306,13 +350,13 @@ class BoletaController extends Controller
     private function applyFilters($query, Request $request): void
     {
         $filters = [
-            'company_id' => 'where',
             'branch_id' => 'where',
             'estado_sunat' => 'where',
             'fecha_desde' => 'whereDate|>=',
             'fecha_hasta' => 'whereDate|<='
         ];
 
+        // company_id ya se maneja antes de llamar a este método
         foreach ($filters as $field => $operation) {
             if ($request->has($field)) {
                 $parts = explode('|', $operation);

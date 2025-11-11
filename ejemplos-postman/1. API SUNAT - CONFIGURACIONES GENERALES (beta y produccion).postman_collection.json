@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "7d88837a-21b0-4488-bb67-f88e8086ce26",
 		"name": "1. API SUNAT - CONFIGURACIONES GENERALES (beta y produccion)",
-		"description": "Colección completa del sistema de facturación electrónica SUNAT con soporte para ambientes Beta y Producción. Incluye configuración paso a paso, todos los endpoints disponibles y workflows completos desde configuración inicial hasta operaciones diarias.\n\n🏗️ **CONFIGURACIÓN INICIAL REQUERIDA:**\n1. Configurar variables de ambiente (beta/producción)\n2. Ejecutar setup inicial del sistema\n3. Crear usuario administrador\n4. Configurar empresa con credenciales SUNAT\n5. Configurar sucursales y correlativos\n\n📋 **MÓDULOS INCLUIDOS:**\n- Setup e inicialización del sistema\n- Gestión de usuarios y autenticación\n- Configuración de empresas multi-tenant\n- Configuraciones avanzadas por empresa\n- Gestión de sucursales y clientes\n- Documentos electrónicos (Facturas, Boletas, Notas)\n- Guías de remisión electrónicas (GRE)\n- Resúmenes diarios y anulaciones\n- Consultas CPE avanzadas\n- Servicios de ubigeo peruano\n\n🔄 **AMBIENTES:**\n- **Beta**: Ambiente de pruebas SUNAT\n- **Producción**: Ambiente productivo SUNAT",
+		"description": "Colección completa del sistema de facturación electrónica SUNAT con soporte para ambientes Beta y Producción. Incluye configuración paso a paso, todos los endpoints disponibles y workflows completos desde configuración inicial hasta operaciones diarias.\n\n🏗️ **CONFIGURACIÓN INICIAL REQUERIDA:**\n1. Configurar variables de ambiente (beta/producción)\n2. Ejecutar setup inicial del sistema\n3. Crear usuario administrador\n4. Configurar empresa con credenciales SUNAT\n5. Configurar sucursales y correlativos\n\n📋 **MÓDULOS INCLUIDOS:**\n- Setup e inicialización del sistema\n- Gestión de usuarios y autenticación\n- Configuración de empresas multi-tenant\n- Configuraciones avanzadas por empresa\n- Gestión de sucursales y clientes\n- Documentos electrónicos (Facturas, Boletas, Notas)\n- Guías de remisión electrónicas (GRE)\n- Resúmenes diarios y anulaciones\n- Consultas CPE avanzadas\n- Servicios de ubigeo peruano\n\n🔑 **TOKENS Y SUSCRIPCIONES:**\n- Al crear una empresa, se genera automáticamente un token de API\n- Ver colección \"9. API SUNAT - Tokens y Suscripciones\" para gestión completa\n- Sistema de límites automáticos por suscripción\n\n🔄 **AMBIENTES:**\n- **Beta**: Ambiente de pruebas SUNAT\n- **Producción**: Ambiente productivo SUNAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20633485"
 	},
@@ -418,7 +418,7 @@
 								"companies"
 							]
 						},
-						"description": "Crea una nueva empresa con datos básicos. Usar modo_produccion: false para testing."
+						"description": "Crea una nueva empresa con datos básicos. Usar modo_produccion: false para testing.\n\n⚡ **IMPORTANTE**: Al crear una empresa, el sistema automáticamente crea un token de API por defecto con:\n- Nombre: \"Token Principal - {Razón Social}\"\n- Permisos: Todos los permisos (*)\n- Sin expiración\n- Estado: Activo\n\nPuedes obtener este token listando los tokens de la empresa con: GET /api/v1/companies/{company_id}/tokens\n\nVer colección \"9. API SUNAT - Tokens y Suscripciones\" para más detalles sobre gestión de tokens."
 					},
 					"response": []
 				},

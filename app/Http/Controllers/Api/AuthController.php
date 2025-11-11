@@ -142,21 +142,52 @@ class AuthController extends Controller
     }
 
     /**
-     * Información del usuario autenticado
+     * Información del usuario autenticado o empresa
      */
     public function me(Request $request)
     {
-        $user = $request->user()->load('role', 'company');
+        // Si es un token de empresa, retornar información de la empresa
+        $company = $request->attributes->get('company');
+        $companyToken = $request->attributes->get('company_token');
+        
+        if ($company && $companyToken) {
+            return response()->json([
+                'type' => 'company_token',
+                'company' => [
+                    'id' => $company->id,
+                    'ruc' => $company->ruc,
+                    'razon_social' => $company->razon_social,
+                    'nombre_comercial' => $company->nombre_comercial,
+                ],
+                'token' => [
+                    'name' => $companyToken->name,
+                    'abilities' => $companyToken->abilities,
+                ]
+            ]);
+        }
+        
+        // Si es un usuario, cargar relaciones
+        $user = $request->user();
+        if (!$user || !method_exists($user, 'load')) {
+            return response()->json([
+                'message' => 'Usuario no autenticado',
+                'status' => 'error'
+            ], 401);
+        }
+        
+        $user = $user->load('role', 'company');
 
         return response()->json([
+            'type' => 'user',
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->role ? $user->role->display_name : 'Sin rol',
                 'company' => $user->company ? $user->company->razon_social : null,
-                'permissions' => $user->getAllPermissions(),
-                'last_login_at' => $user->last_login_at,
+                'company_id' => $user->company_id,
+                'permissions' => method_exists($user, 'getAllPermissions') ? $user->getAllPermissions() : [],
+                'last_login_at' => $user->last_login_at ?? null,
                 'created_at' => $user->created_at
             ]
         ]);
@@ -167,7 +198,8 @@ class AuthController extends Controller
      */
     public function createUser(Request $request)
     {
-        if (!$request->user()->hasRole('super_admin')) {
+        $user = $request->user();
+        if (!$user || !method_exists($user, 'hasRole') || !$user->hasRole('super_admin')) {
             return response()->json([
                 'message' => 'No tienes permisos para crear usuarios',
                 'status' => 'error'

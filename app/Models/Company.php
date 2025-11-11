@@ -6,6 +6,7 @@ use App\Traits\HasCompanyConfigurations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\CompanyApiToken;
 
 class Company extends Model
 {
@@ -110,6 +111,123 @@ class Company extends Model
         return $this->hasMany(VoidedDocument::class);
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function activeSubscription(): ?Subscription
+    {
+        return $this->subscriptions()
+            ->where('status', 'active')
+            ->where(function($q) {
+                $q->whereNull('ends_at')
+                  ->orWhere('ends_at', '>', now());
+            })
+            ->latest()
+            ->first();
+    }
+
+    public function apiTokens(): HasMany
+    {
+        return $this->hasMany(CompanyApiToken::class);
+    }
+
+    public function activeApiTokens(): HasMany
+    {
+        return $this->hasMany(CompanyApiToken::class)
+            ->where('is_active', true)
+            ->where(function($q) {
+                $q->whereNull('expires_at')
+                  ->orWhere('expires_at', '>', now());
+            });
+    }
+
+    /**
+     * Verificar si la empresa tiene una suscripción activa
+     */
+    public function hasActiveSubscription(): bool
+    {
+        $subscription = $this->activeSubscription();
+        return $subscription !== null && $subscription->isActive();
+    }
+
+    /**
+     * Verificar si la empresa puede usar el API
+     */
+    public function canUseApi(): bool
+    {
+        if (!$this->activo) {
+            return false;
+        }
+
+        // Si no hay sistema de suscripciones habilitado, permitir acceso
+        // Puedes cambiar esto según tu lógica de negocio
+        if (!config('app.require_subscription', false)) {
+            return true;
+        }
+
+        return $this->hasActiveSubscription();
+    }
+
+    /**
+     * Verificar si puede crear un documento (verifica límites de suscripción)
+     */
+    public function canCreateDocument(?float $amount = null): bool
+    {
+        if (!$this->canUseApi()) {
+            return false;
+        }
+
+        $subscription = $this->activeSubscription();
+        
+        // Si no requiere suscripción, permitir
+        if (!config('app.require_subscription', false) || !$subscription) {
+            return true;
+        }
+
+        // Verificar límites de la suscripción
+        if ($amount !== null) {
+            return $subscription->canCreateDocumentWithAmount($amount);
+        }
+
+        return $subscription->canCreateDocument();
+    }
+
+    /**
+     * Registrar creación de documento en la suscripción
+     */
+    public function recordDocumentCreation(float $amount = 0): void
+    {
+        $subscription = $this->activeSubscription();
+        if ($subscription) {
+            $subscription->incrementDocumentsCount();
+            if ($amount > 0) {
+                $subscription->incrementSalesAmount($amount);
+            }
+        }
+    }
+
+    /**
+     * Crear token de API por defecto al crear empresa
+     */
+    public function createDefaultApiToken(): void
+    {
+        try {
+            CompanyApiToken::createForCompany(
+                $this->id,
+                'Token Principal - ' . $this->razon_social,
+                ['*'], // Todos los permisos por defecto
+                null // Sin expiración por defecto
+            );
+        } catch (\Exception $e) {
+            // Log error pero no fallar la creación de la empresa
+            \Log::error('Error al crear token por defecto para empresa: ' . $e->getMessage(), [
+                'company_id' => $this->id
+            ]);
+        }
+    }
+
     public function getEndpointAttribute(): string
     {
         return $this->modo_produccion ? $this->endpoint_produccion : $this->endpoint_beta;
@@ -148,6 +266,11 @@ class Company extends Model
         // static::created(function ($company) {
         //     $company->initializeDefaultConfigurations();
         // });
+        
+        // Crear token de API automáticamente al crear una empresa
+        static::created(function ($company) {
+            $company->createDefaultApiToken();
+        });
     }
 
     /**

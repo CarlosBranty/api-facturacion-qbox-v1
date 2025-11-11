@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\GetsCompanyFromRequest;
 use App\Http\Requests\Branch\StoreBranchRequest;
 use App\Http\Requests\Branch\UpdateBranchRequest;
 use App\Models\Branch;
@@ -14,6 +15,7 @@ use Exception;
 
 class BranchController extends Controller
 {
+    use GetsCompanyFromRequest;
     /**
      * Listar sucursales de una empresa
      */
@@ -24,7 +26,17 @@ class BranchController extends Controller
 
             // Filtrar por empresa si se proporciona
             if ($request->has('company_id')) {
+                // Validar acceso
+                if (!$this->canAccessCompany($request, $request->company_id)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No tienes acceso a esta empresa'
+                    ], 403);
+                }
                 $query->where('company_id', $request->company_id);
+            } else {
+                // Si no se proporciona, filtrar por empresa del request (si aplica)
+                $this->filterByRequestCompany($query, $request);
             }
 
             $branches = $query->get();

@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "tokens-suscripciones-2025-01-15",
+		"name": "9. API SUNAT - Tokens y Suscripciones",
+		"description": "Colección completa para gestionar tokens de API por empresa y suscripciones/licencias.\n\n🔑 **TOKENS DE EMPRESA:**\n- Crear tokens de API para integraciones\n- Listar y gestionar tokens\n- Regenerar y revocar tokens\n- Usar tokens para consumir el API\n\n💳 **SUSCRIPCIONES:**\n- Crear y gestionar suscripciones\n- Configurar límites (documentos, ventas, usuarios)\n- Activar, cancelar y renovar suscripciones\n- Verificar estado de suscripciones\n\n📊 **LÍMITES AUTOMÁTICOS:**\n- Límite mensual de documentos\n- Límite total de documentos\n- Límite total de monto de ventas\n- Verificación automática antes de crear documentos\n\n⚡ **CREACIÓN AUTOMÁTICA:**\n- Al crear una empresa, se genera automáticamente un token principal\n- El token está listo para usar inmediatamente\n\n**Variables requeridas:**\n- base_url: URL base de la API\n- company_id: ID de la empresa\n- token: Bearer token de autenticación de usuario (para gestionar tokens/suscripciones)\n- company_token: Token de empresa (para usar el API directamente)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TOKENS DE EMPRESA",
+			"item": [
+				{
+					"name": "1.1 - Listar Tokens de una Empresa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens"
+							]
+						},
+						"description": "Lista todos los tokens de API de una empresa. Requiere autenticación de usuario."
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 - Crear Token de API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.token && jsonData.token.token) {",
+									"        pm.collectionVariables.set('company_token', jsonData.token.token);",
+									"        console.log('✅ Token de empresa guardado: ' + jsonData.token.token.substring(0, 20) + '...');",
+									"        console.log('⚠️ IMPORTANTE: Guarda este token de forma segura. No se mostrará nuevamente.');",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Token para integración ERP\",\n    \"abilities\": [\"*\"],\n    \"expires_at\": \"2025-12-31 23:59:59\",\n    \"allowed_ips\": [\"192.168.1.100\"],\n    \"max_requests_per_day\": 10000,\n    \"max_requests_per_minute\": 100\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens"
+							]
+						},
+						"description": "Crea un nuevo token de API para la empresa. El token se guarda automáticamente en la variable 'company_token'.\n\n**Parámetros opcionales:**\n- abilities: Array de permisos (ej: [\"invoices.create\", \"boletas.view\"]) o [\"*\"] para todos\n- expires_at: Fecha de expiración (formato: YYYY-MM-DD HH:MM:SS)\n- allowed_ips: Array de IPs permitidas (ej: [\"192.168.1.100\", \"10.0.0.0/8\"])\n- max_requests_per_day: Límite de solicitudes por día\n- max_requests_per_minute: Límite de solicitudes por minuto"
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 - Ver Token Específico",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens",
+								"1"
+							]
+						},
+						"description": "Obtiene información detallada de un token específico. Reemplaza '1' con el ID del token."
+					},
+					"response": []
+				},
+				{
+					"name": "1.4 - Actualizar Token",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Token actualizado\",\n    \"is_active\": true,\n    \"abilities\": [\"invoices.create\", \"invoices.view\"],\n    \"expires_at\": \"2026-12-31 23:59:59\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens",
+								"1"
+							]
+						},
+						"description": "Actualiza un token existente. Reemplaza '1' con el ID del token."
+					},
+					"response": []
+				},
+				{
+					"name": "1.5 - Regenerar Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.token && jsonData.token.token) {",
+									"        pm.collectionVariables.set('company_token', jsonData.token.token);",
+									"        console.log('✅ Nuevo token regenerado y guardado');",
+									"        console.log('⚠️ El token anterior ha sido revocado');",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1/regenerate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens",
+								"1",
+								"regenerate"
+							]
+						},
+						"description": "Regenera un token (crea uno nuevo y revoca el anterior). El nuevo token se guarda automáticamente."
+					},
+					"response": []
+				},
+				{
+					"name": "1.6 - Revocar Token",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens",
+								"1"
+							]
+						},
+						"description": "Revoca (desactiva) un token. Reemplaza '1' con el ID del token."
+					},
+					"response": []
+				},
+				{
+					"name": "1.7 - Usar Token de Empresa (Obtener Info)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{company_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/company/info",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"company",
+								"info"
+							]
+						},
+						"description": "Ejemplo de uso del token de empresa para consumir el API. Usa el token en lugar del token de usuario.\n\n**Nota:** También puedes usar el header 'X-API-Key' en lugar de 'Authorization: Bearer'"
+					},
+					"response": []
+				}
+			],
+			"description": "Gestión completa de tokens de API por empresa. Los tokens permiten a las empresas consumir el API directamente sin autenticación de usuario."
+		},
+		{
+			"name": "SUSCRIPCIONES",
+			"item": [
+				{
+					"name": "2.1 - Listar Suscripciones de una Empresa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions"
+							]
+						},
+						"description": "Lista todas las suscripciones de una empresa."
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 - Ver Suscripción Activa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"active"
+							]
+						},
+						"description": "Obtiene la suscripción activa de la empresa, si existe."
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 - Crear Suscripción (Solo Super Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"plan_name\": \"premium\",\n    \"plan_type\": \"monthly\",\n    \"price\": 299.00,\n    \"currency\": \"PEN\",\n    \"starts_at\": \"2025-01-15 00:00:00\",\n    \"ends_at\": \"2025-02-15 23:59:59\",\n    \"max_documents_per_month\": 10000,\n    \"max_total_documents\": 50000,\n    \"max_total_sales_amount\": 1000000.00,\n    \"max_users\": 5,\n    \"max_branches\": 3,\n    \"features\": [\"api_access\", \"priority_support\", \"custom_integrations\"],\n    \"payment_method\": \"stripe\",\n    \"payment_reference\": \"ch_1234567890\",\n    \"cancel_previous\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions"
+							]
+						},
+						"description": "Crea una nueva suscripción para la empresa. Solo super administradores pueden crear suscripciones.\n\n**Límites configurables:**\n- max_documents_per_month: Límite mensual (null = ilimitado)\n- max_total_documents: Límite total desde inicio (null = ilimitado)\n- max_total_sales_amount: Límite total de monto (null = ilimitado)\n- max_users: Máximo de usuarios\n- max_branches: Máximo de sucursales\n\n**Tipos de plan:**\n- monthly: Mensual\n- yearly: Anual\n- lifetime: De por vida\n\n**cancel_previous:** Si es true, cancela suscripciones activas anteriores."
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 - Ver Suscripción Específica",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"1"
+							]
+						},
+						"description": "Obtiene información detallada de una suscripción específica. Reemplaza '1' con el ID de la suscripción."
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 - Actualizar Suscripción (Solo Super Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"plan_name\": \"enterprise\",\n    \"max_total_documents\": 100000,\n    \"max_total_sales_amount\": 5000000.00,\n    \"max_users\": 10,\n    \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"1"
+							]
+						},
+						"description": "Actualiza una suscripción existente. Solo super administradores pueden actualizar suscripciones."
+					},
+					"response": []
+				},
+				{
+					"name": "2.6 - Activar Suscripción (Solo Super Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/activate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"1",
+								"activate"
+							]
+						},
+						"description": "Activa una suscripción. Solo super administradores pueden activar suscripciones."
+					},
+					"response": []
+				},
+				{
+					"name": "2.7 - Cancelar Suscripción (Solo Super Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/cancel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"1",
+								"cancel"
+							]
+						},
+						"description": "Cancela una suscripción. Solo super administradores pueden cancelar suscripciones."
+					},
+					"response": []
+				},
+				{
+					"name": "2.8 - Renovar Suscripción (Solo Super Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"months\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/renew",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"1",
+								"renew"
+							]
+						},
+						"description": "Renueva una suscripción agregando meses adicionales. Solo super administradores pueden renovar suscripciones.\n\n**Parámetros:**\n- months: Número de meses a agregar (1-12)"
+					},
+					"response": []
+				}
+			],
+			"description": "Gestión completa de suscripciones/licencias por empresa. Las suscripciones controlan el acceso al API y los límites de uso."
+		},
+		{
+			"name": "EJEMPLOS DE USO CON TOKEN DE EMPRESA",
+			"item": [
+				{
+					"name": "3.1 - Crear Factura con Token de Empresa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{company_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": 1,\n    \"client\": {\n        \"tipo_documento\": \"6\",\n        \"numero_documento\": \"20100070970\",\n        \"razon_social\": \"CLIENTE PRUEBA SAC\",\n        \"direccion\": \"AV. PRINCIPAL 123\"\n    },\n    \"serie\": \"F001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD001\",\n            \"descripcion\": \"Producto de prueba\",\n            \"cantidad\": 1,\n            \"unidad_medida\": \"NIU\",\n            \"precio_unitario\": 100.00,\n            \"tipo_igv\": \"10\",\n            \"igv\": 18.00,\n            \"precio_total\": 118.00\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices"
+							]
+						},
+						"description": "Ejemplo de creación de factura usando token de empresa. El sistema verificará automáticamente los límites de suscripción antes de crear el documento.\n\n**Nota:** Si se alcanza un límite, recibirás un error con información detallada de los límites restantes."
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 - Crear Boleta con Token de Empresa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{company_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": 1,\n    \"client\": {\n        \"tipo_documento\": \"1\",\n        \"numero_documento\": \"12345678\",\n        \"nombre\": \"Juan Pérez\",\n        \"direccion\": \"AV. PRINCIPAL 456\"\n    },\n    \"serie\": \"B001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD002\",\n            \"descripcion\": \"Producto de prueba\",\n            \"cantidad\": 2,\n            \"unidad_medida\": \"NIU\",\n            \"precio_unitario\": 50.00,\n            \"tipo_igv\": \"10\",\n            \"igv\": 18.00,\n            \"precio_total\": 118.00\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/boletas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"boletas"
+							]
+						},
+						"description": "Ejemplo de creación de boleta usando token de empresa. El sistema verificará automáticamente los límites de suscripción."
+					},
+					"response": []
+				}
+			],
+			"description": "Ejemplos prácticos de cómo usar tokens de empresa para consumir el API directamente desde otras aplicaciones."
+		},
+		{
+			"name": "VERIFICACIÓN DE LÍMITES",
+			"item": [
+				{
+					"name": "4.1 - Ver Límites de Suscripción Activa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"subscriptions",
+								"active"
+							]
+						},
+						"description": "Obtiene información sobre los límites actuales de la suscripción activa, incluyendo:\n- Documentos restantes (mensual y total)\n- Monto restante de ventas\n- Estado de la suscripción\n\n**Respuesta incluye:**\n- max_total_documents: Límite total configurado\n- total_documents_created: Documentos ya creados\n- remaining_documents: Documentos restantes\n- max_total_sales_amount: Límite de monto configurado\n- total_sales_amount: Monto ya utilizado\n- remaining_sales_amount: Monto restante"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para verificar el estado de los límites de suscripción antes de crear documentos."
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "company_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_bearer_token_here",
+			"type": "string",
+			"description": "Token de autenticación de usuario (obtenido con /auth/login)"
+		},
+		{
+			"key": "company_token",
+			"value": "your_company_api_token_here",
+			"type": "string",
+			"description": "Token de API de la empresa (obtenido al crear un token o automáticamente al crear la empresa)"
+		}
+	]
+}
+

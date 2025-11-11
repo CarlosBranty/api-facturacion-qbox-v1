@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\HandlesPdfGeneration;
+use App\Traits\GetsCompanyFromRequest;
 use App\Services\DocumentService;
 use App\Services\FileService;
 use App\Models\Invoice;
@@ -14,7 +15,7 @@ use Illuminate\Http\JsonResponse;
 
 class InvoiceController extends Controller
 {
-    use HandlesPdfGeneration;
+    use HandlesPdfGeneration, GetsCompanyFromRequest;
     protected $documentService;
     protected $fileService;
 
@@ -29,9 +30,18 @@ class InvoiceController extends Controller
         try {
             $query = Invoice::with(['company', 'branch', 'client']);
 
-            // Filtros
+            // Si se proporciona company_id, validar acceso
             if ($request->has('company_id')) {
+                if (!$this->canAccessCompany($request, $request->company_id)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No tienes acceso a esta empresa'
+                    ], 403);
+                }
                 $query->where('company_id', $request->company_id);
+            } else {
+                // Si no se proporciona, filtrar por empresa del request (si aplica)
+                $this->filterByRequestCompany($query, $request);
             }
 
             if ($request->has('branch_id')) {
@@ -73,6 +83,26 @@ class InvoiceController extends Controller
         try {
             $validated = $request->validated();
 
+            // Si no se proporciona company_id, usar la empresa del request
+            if (!isset($validated['company_id'])) {
+                $company = $this->getCompanyFromRequest($request);
+                if (!$company) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No se pudo determinar la empresa. Proporciona company_id o usa un token de empresa.'
+                    ], 400);
+                }
+                $validated['company_id'] = $company->id;
+            } else {
+                // Validar acceso a la empresa especificada
+                if (!$this->canAccessCompany($request, $validated['company_id'])) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'No tienes acceso a esta empresa'
+                    ], 403);
+                }
+            }
+
             // Crear la factura
             $invoice = $this->documentService->createInvoice($validated);
 
@@ -91,10 +121,18 @@ class InvoiceController extends Controller
         }
     }
 
-    public function show($id): JsonResponse
+    public function show(Request $request, $id): JsonResponse
     {
         try {
             $invoice = Invoice::with(['company', 'branch', 'client'])->findOrFail($id);
+
+            // Validar acceso a la empresa de la factura
+            if (!$this->canAccessCompany($request, $invoice->company_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No tienes acceso a esta factura'
+                ], 403);
+            }
 
             return response()->json([
                 'success' => true,
@@ -111,10 +149,18 @@ class InvoiceController extends Controller
         }
     }
 
-    public function sendToSunat($id): JsonResponse
+    public function sendToSunat(Request $request, $id): JsonResponse
     {
         try {
             $invoice = Invoice::with(['company', 'branch', 'client'])->findOrFail($id);
+
+            // Validar acceso
+            if (!$this->canAccessCompany($request, $invoice->company_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No tienes acceso a esta factura'
+                ], 403);
+            }
 
             if ($invoice->estado_sunat === 'ACEPTADO') {
                 return response()->json([
@@ -167,10 +213,18 @@ class InvoiceController extends Controller
         }
     }
 
-    public function downloadXml($id)
+    public function downloadXml(Request $request, $id)
     {
         try {
             $invoice = Invoice::findOrFail($id);
+            
+            // Validar acceso
+            if (!$this->canAccessCompany($request, $invoice->company_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No tienes acceso a esta factura'
+                ], 403);
+            }
             
             $download = $this->fileService->downloadXml($invoice);
             
@@ -192,10 +246,18 @@ class InvoiceController extends Controller
         }
     }
 
-    public function downloadCdr($id)
+    public function downloadCdr(Request $request, $id)
     {
         try {
             $invoice = Invoice::findOrFail($id);
+            
+            // Validar acceso
+            if (!$this->canAccessCompany($request, $invoice->company_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No tienes acceso a esta factura'
+                ], 403);
+            }
             
             $download = $this->fileService->downloadCdr($invoice);
             
@@ -217,15 +279,33 @@ class InvoiceController extends Controller
         }
     }
 
-    public function downloadPdf($id, Request $request)
+    public function downloadPdf(Request $request, $id)
     {
         $invoice = Invoice::findOrFail($id);
+        
+        // Validar acceso
+        if (!$this->canAccessCompany($request, $invoice->company_id)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No tienes acceso a esta factura'
+            ], 403);
+        }
+        
         return $this->downloadDocumentPdf($invoice, $request);
     }
 
-    public function generatePdf($id, Request $request)
+    public function generatePdf(Request $request, $id)
     {
         $invoice = Invoice::with(['company', 'branch', 'client'])->findOrFail($id);
+        
+        // Validar acceso
+        if (!$this->canAccessCompany($request, $invoice->company_id)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No tienes acceso a esta factura'
+            ], 403);
+        }
+        
         return $this->generateDocumentPdf($invoice, 'invoice', $request);
     }
 

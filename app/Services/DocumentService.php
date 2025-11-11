@@ -40,26 +40,45 @@ class DocumentService
                            ->where('id', $data['branch_id'])
                            ->firstOrFail();
             
-            // Crear o buscar cliente
-            $client = $this->getOrCreateClient($data['client']);
-            
-            // Obtener siguiente correlativo
-            $serie = $data['serie'];
-            $correlativo = $branch->getNextCorrelative('01', $serie);
-            
-            // Preparar datos globales para cálculos
+            // Verificar límites de suscripción antes de crear el documento
+            // Primero calculamos los totales para verificar el monto
             $globalData = [
                 'descuentos' => $data['descuentos'] ?? [],
                 'anticipos' => $data['anticipos'] ?? [],
                 'redondeo' => $data['redondeo'] ?? 0,
             ];
             
-            // Procesar detalles según tipo de operación antes de calcular totales
             $tipoOperacion = $data['tipo_operacion'] ?? '0101';
             $this->processDetailsForOperationType($data['detalles'], $tipoOperacion);
-            
-            // Calcular totales automáticamente
             $totals = $this->calculateTotals($data['detalles'], $globalData);
+            
+            // Verificar límites de suscripción
+            if (!$company->canCreateDocument($totals['mto_imp_venta'])) {
+                $subscription = $company->activeSubscription();
+                $message = 'Límite de suscripción alcanzado. ';
+                
+                if ($subscription) {
+                    $remainingDocs = $subscription->getRemainingDocuments();
+                    $remainingAmount = $subscription->getRemainingSalesAmount();
+                    
+                    if ($remainingDocs !== null) {
+                        $message .= "Documentos restantes: {$remainingDocs}. ";
+                    }
+                    
+                    if ($remainingAmount !== null) {
+                        $message .= "Monto restante: " . number_format($remainingAmount, 2) . " {$subscription->currency}.";
+                    }
+                }
+                
+                throw new Exception($message);
+            }
+            
+            // Crear o buscar cliente
+            $client = $this->getOrCreateClient($data['client']);
+            
+            // Obtener siguiente correlativo
+            $serie = $data['serie'];
+            $correlativo = $branch->getNextCorrelative('01', $serie);
             
             // Crear factura
             $invoice = Invoice::create([
@@ -109,6 +128,9 @@ class DocumentService
                 'usuario_creacion' => $data['usuario_creacion'] ?? null,
             ]);
 
+            // Registrar creación de documento en la suscripción
+            $company->recordDocumentCreation($totals['mto_imp_venta']);
+
             return $invoice;
         });
     }
@@ -122,22 +144,43 @@ class DocumentService
                            ->where('id', $data['branch_id'])
                            ->firstOrFail();
             
-            // Crear o buscar cliente
-            $client = $this->getOrCreateClient($data['client']);
-            
-            // Obtener siguiente correlativo
-            $serie = $data['serie'];
-            $correlativo = $branch->getNextCorrelative('03', $serie);
-            
-            // Preparar datos globales para cálculos
+            // Verificar límites de suscripción antes de crear el documento
+            // Primero calculamos los totales para verificar el monto
             $globalData = [
                 'descuentos' => $data['descuentos'] ?? [],
                 'anticipos' => $data['anticipos'] ?? [],
                 'redondeo' => $data['redondeo'] ?? 0,
             ];
             
-            // Calcular totales automáticamente (esto modifica $data['detalles'] por referencia)
             $totals = $this->calculateTotals($data['detalles'], $globalData);
+            
+            // Verificar límites de suscripción
+            if (!$company->canCreateDocument($totals['mto_imp_venta'])) {
+                $subscription = $company->activeSubscription();
+                $message = 'Límite de suscripción alcanzado. ';
+                
+                if ($subscription) {
+                    $remainingDocs = $subscription->getRemainingDocuments();
+                    $remainingAmount = $subscription->getRemainingSalesAmount();
+                    
+                    if ($remainingDocs !== null) {
+                        $message .= "Documentos restantes: {$remainingDocs}. ";
+                    }
+                    
+                    if ($remainingAmount !== null) {
+                        $message .= "Monto restante: " . number_format($remainingAmount, 2) . " {$subscription->currency}.";
+                    }
+                }
+                
+                throw new Exception($message);
+            }
+            
+            // Crear o buscar cliente
+            $client = $this->getOrCreateClient($data['client']);
+            
+            // Obtener siguiente correlativo
+            $serie = $data['serie'];
+            $correlativo = $branch->getNextCorrelative('03', $serie);
             
             // Crear boleta
             $boleta = Boleta::create([
@@ -172,6 +215,9 @@ class DocumentService
                 'datos_adicionales' => $data['datos_adicionales'] ?? null,
                 'usuario_creacion' => $data['usuario_creacion'] ?? null,
             ]);
+
+            // Registrar creación de documento en la suscripción
+            $company->recordDocumentCreation($totals['mto_imp_venta']);
 
             return $boleta;
         });
