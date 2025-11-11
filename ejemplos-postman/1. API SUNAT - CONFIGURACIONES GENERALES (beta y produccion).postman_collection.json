@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "7d88837a-21b0-4488-bb67-f88e8086ce26",
 		"name": "1. API SUNAT - CONFIGURACIONES GENERALES (beta y produccion)",
-		"description": "Colección completa del sistema de facturación electrónica SUNAT con soporte para ambientes Beta y Producción. Incluye configuración paso a paso, todos los endpoints disponibles y workflows completos desde configuración inicial hasta operaciones diarias.\n\n🏗️ **CONFIGURACIÓN INICIAL REQUERIDA:**\n1. Configurar variables de ambiente (beta/producción)\n2. Ejecutar setup inicial del sistema\n3. Crear usuario administrador\n4. Configurar empresa con credenciales SUNAT\n5. Configurar sucursales y correlativos\n\n📋 **MÓDULOS INCLUIDOS:**\n- Setup e inicialización del sistema\n- Gestión de usuarios y autenticación\n- Configuración de empresas multi-tenant\n- Configuraciones avanzadas por empresa\n- Gestión de sucursales y clientes\n- Documentos electrónicos (Facturas, Boletas, Notas)\n- Guías de remisión electrónicas (GRE)\n- Resúmenes diarios y anulaciones\n- Consultas CPE avanzadas\n- Servicios de ubigeo peruano\n\n🔑 **TOKENS Y SUSCRIPCIONES:**\n- Al crear una empresa, se genera automáticamente un token de API\n- Ver colección \"9. API SUNAT - Tokens y Suscripciones\" para gestión completa\n- Sistema de límites automáticos por suscripción\n\n🔄 **AMBIENTES:**\n- **Beta**: Ambiente de pruebas SUNAT\n- **Producción**: Ambiente productivo SUNAT",
+		"description": "Colección completa del sistema de facturación electrónica SUNAT con soporte para ambientes Beta y Producción. Incluye configuración paso a paso, todos los endpoints disponibles y workflows completos desde configuración inicial hasta operaciones diarias.\n\n🏗️ **CONFIGURACIÓN INICIAL REQUERIDA:**\n1. Configurar variables de ambiente (beta/producción)\n2. Ejecutar setup inicial del sistema\n3. Crear usuario administrador\n4. Configurar empresa con credenciales SUNAT\n5. Configurar sucursales y correlativos\n\n📋 **MÓDULOS INCLUIDOS:**\n- Setup e inicialización del sistema\n- Gestión de usuarios y autenticación\n- **Tokens de empresa para integraciones**\n- Configuración de empresas multi-tenant\n- Configuraciones avanzadas por empresa\n- Gestión de sucursales y clientes\n- Documentos electrónicos (Facturas, Boletas, Notas)\n- Guías de remisión electrónicas (GRE)\n- Resúmenes diarios y anulaciones\n- Consultas CPE avanzadas\n- Servicios de ubigeo peruano\n\n🔑 **SISTEMA DE TOKENS DUAL:**\n- **Tokens de Usuario (Sanctum)**: Para gestión administrativa (crear empresas, gestionar tokens, etc.)\n- **Tokens de Empresa**: Para integraciones automatizadas (crear documentos, consultas, etc.)\n- Al crear una empresa, se genera automáticamente un token de API principal\n- Los tokens se guardan automáticamente en variables compartidas\n- Ver colección \"9. API SUNAT - Tokens y Suscripciones\" para gestión completa\n- Sistema de límites automáticos por suscripción\n\n📦 **VARIABLES COMPARTIDAS:**\n- `base_url`: URL base del API\n- `user_token` / `access_token`: Token de usuario (Sanctum)\n- `company_token`: Token de empresa para integraciones\n- `company_id`: ID de empresa actual\n- Todas las variables se comparten entre colecciones para facilitar las pruebas\n\n🔄 **AMBIENTES:**\n- **Beta**: Ambiente de pruebas SUNAT\n- **Producción**: Ambiente productivo SUNAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20633485"
 	},
@@ -172,12 +172,14 @@
 									"    var jsonData = pm.response.json();",
 									"    if (jsonData.access_token) {",
 									"        pm.collectionVariables.set('access_token', jsonData.access_token);",
+									"        pm.collectionVariables.set('user_token', jsonData.access_token);",
 									"        pm.collectionVariables.set('token_type', jsonData.token_type || 'Bearer');",
 									"        pm.collectionVariables.set('user_id', jsonData.user.id);",
 									"        pm.collectionVariables.set('user_name', jsonData.user.name);",
-									"        console.log('✅ Token obtenido: ' + jsonData.access_token.substring(0, 20) + '...');",
+									"        console.log('✅ Token de usuario obtenido: ' + jsonData.access_token.substring(0, 20) + '...');",
 									"        console.log('👤 Usuario: ' + jsonData.user.name + ' (' + jsonData.user.email + ')');",
 									"        console.log('⏰ Expira en: ' + (jsonData.expires_in || 1440) + ' minutos');",
+									"        console.log('💡 Puedes usar este token para gestionar empresas, tokens y suscripciones');",
 									"    }",
 									"}"
 								],
@@ -312,6 +314,106 @@
 			"description": "Sistema de autenticación completo con Laravel Sanctum, gestión de usuarios y tokens de API."
 		},
 		{
+			"name": "FASE 2.5: TOKENS DE EMPRESA",
+			"item": [
+				{
+					"name": "2.6 - Obtener Token Principal de Empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.length > 0) {",
+									"        // Buscar el token principal (generalmente el primero o el que tiene 'Principal' en el nombre)",
+									"        var principalToken = jsonData.data.find(function(t) {",
+									"            return t.name && t.name.toLowerCase().includes('principal');",
+									"        }) || jsonData.data[0];",
+									"        ",
+									"        if (principalToken && principalToken.token) {",
+									"            pm.collectionVariables.set('company_token', principalToken.token);",
+									"            console.log('✅ Token de empresa guardado automáticamente');",
+									"            console.log('🏢 Token: ' + principalToken.name);",
+									"            console.log('⚠️ IMPORTANTE: Este token se muestra solo una vez. Guárdalo de forma segura.');",
+									"        } else {",
+									"            console.log('⚠️ No se encontró token con valor. Los tokens solo se muestran al crearlos.');",
+									"        }",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"{{company_id}}",
+								"tokens"
+							]
+						},
+						"description": "Lista todos los tokens de la empresa. Si hay un token principal, intenta guardarlo automáticamente.\n\n**Nota**: Los tokens solo muestran su valor completo cuando se crean. Para obtener un token nuevo, usa la colección \"9. API SUNAT - Tokens y Suscripciones\"."
+					},
+					"response": []
+				},
+				{
+					"name": "2.7 - Usar Token de Empresa para Crear Factura",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{company_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": {{branch_id}},\n    \"serie\": \"F001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"tipo_operacion\": \"0101\",\n    \"metodo_envio\": \"individual\",\n    \"forma_pago_tipo\": \"Contado\",\n    \"client\": {\n        \"tipo_documento\": \"6\",\n        \"numero_documento\": \"{{client_ruc_id}}\",\n        \"razon_social\": \"CLIENTE DEMO SAC\"\n    },\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD001\",\n            \"descripcion\": \"Producto de prueba\",\n            \"unidad\": \"NIU\",\n            \"cantidad\": 1,\n            \"mto_valor_unitario\": 100.00,\n            \"porcentaje_igv\": 18,\n            \"tip_afe_igv\": \"10\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/invoices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"invoices"
+							]
+						},
+						"description": "Ejemplo de uso del token de empresa para crear una factura. El token de empresa permite que aplicaciones externas consuman el API sin necesidad de autenticación de usuario.\n\n**Ventajas del token de empresa:**\n- No requiere login de usuario\n- Ideal para integraciones automatizadas\n- Permisos específicos por token\n- Límites de rate y IP configurables"
+					},
+					"response": []
+				}
+			],
+			"description": "Gestión y uso de tokens de empresa para integraciones. Los tokens de empresa permiten que aplicaciones externas consuman el API sin autenticación de usuario.\n\n**Ver colección \"9. API SUNAT - Tokens y Suscripciones\" para gestión completa de tokens.**"
+		},
+		{
 			"name": "FASE 3: GESTIÓN DE EMPRESAS",
 			"item": [
 				{
@@ -380,6 +482,7 @@
 									"        console.log('🏢 Empresa: ' + jsonData.data.razon_social);",
 									"        console.log('📄 RUC: ' + jsonData.data.ruc);",
 									"        console.log('🔧 Siguiente paso: Completar configuración SUNAT');",
+									"        console.log('🔑 IMPORTANTE: La empresa tiene un token automático. Usa GET /v1/companies/' + jsonData.data.id + '/tokens para obtenerlo');",
 									"    }",
 									"}"
 								],
@@ -1940,8 +2043,31 @@
 					"    pm.collectionVariables.set('sunat_oauth_endpoint', 'https://api.sunat.gob.pe');",
 					"}",
 					"",
+					"// Sincronizar tokens: user_token y access_token son equivalentes",
+					"const accessToken = pm.collectionVariables.get('access_token');",
+					"const userToken = pm.collectionVariables.get('user_token');",
+					"if (accessToken && !userToken) {",
+					"    pm.collectionVariables.set('user_token', accessToken);",
+					"} else if (userToken && !accessToken) {",
+					"    pm.collectionVariables.set('access_token', userToken);",
+					"}",
+					"",
+					"// Determinar qué token usar automáticamente",
+					"const companyToken = pm.collectionVariables.get('company_token');",
+					"const finalUserToken = pm.collectionVariables.get('user_token') || pm.collectionVariables.get('access_token');",
+					"",
+					"// Variable dinámica para usar el token apropiado",
+					"// Si hay company_token, se puede usar; si no, usar user_token",
+					"// El usuario puede sobrescribir esto manualmente en cada request",
+					"",
 					"console.log('🌐 Ambiente actual: ' + environment);",
-					"console.log('🔗 Endpoint facturación: ' + pm.collectionVariables.get('sunat_billing_endpoint'));"
+					"console.log('🔗 Endpoint facturación: ' + pm.collectionVariables.get('sunat_billing_endpoint'));",
+					"if (finalUserToken) {",
+					"    console.log('👤 Token de usuario disponible');",
+					"}",
+					"if (companyToken) {",
+					"    console.log('🏢 Token de empresa disponible');",
+					"}"
 				]
 			}
 		},
@@ -1968,7 +2094,7 @@
 			"value": "http://localhost:8000/api",
 			"type": "string",
 			"description": {
-				"content": "URL base del API - Cambiar según ambiente",
+				"content": "URL base del API (incluye /api) - Cambiar según ambiente. Ejemplo: http://localhost:8000/api o https://tu-dominio.com/api",
 				"type": "text/plain"
 			}
 		},
@@ -1986,7 +2112,25 @@
 			"value": "",
 			"type": "string",
 			"description": {
-				"content": "Token de acceso - Se asigna automáticamente al hacer login",
+				"content": "Token de acceso de usuario (Sanctum) - Se asigna automáticamente al hacer login. Compatible con 'user_token'.",
+				"type": "text/plain"
+			}
+		},
+		{
+			"key": "user_token",
+			"value": "",
+			"type": "string",
+			"description": {
+				"content": "Token de usuario (Sanctum) - Alias de access_token para claridad. Se usa para autenticación de usuarios.",
+				"type": "text/plain"
+			}
+		},
+		{
+			"key": "company_token",
+			"value": "",
+			"type": "string",
+			"description": {
+				"content": "Token de empresa - Se asigna automáticamente al crear empresa o token. Se usa para autenticación de empresas/integraciones.",
 				"type": "text/plain"
 			}
 		},

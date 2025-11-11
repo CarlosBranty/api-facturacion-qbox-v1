@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "tokens-suscripciones-2025-01-15",
 		"name": "9. API SUNAT - Tokens y Suscripciones",
-		"description": "Colección completa para gestionar tokens de API por empresa y suscripciones/licencias.\n\n🔑 **TOKENS DE EMPRESA:**\n- Crear tokens de API para integraciones\n- Listar y gestionar tokens\n- Regenerar y revocar tokens\n- Usar tokens para consumir el API\n\n💳 **SUSCRIPCIONES:**\n- Crear y gestionar suscripciones\n- Configurar límites (documentos, ventas, usuarios)\n- Activar, cancelar y renovar suscripciones\n- Verificar estado de suscripciones\n\n📊 **LÍMITES AUTOMÁTICOS:**\n- Límite mensual de documentos\n- Límite total de documentos\n- Límite total de monto de ventas\n- Verificación automática antes de crear documentos\n\n⚡ **CREACIÓN AUTOMÁTICA:**\n- Al crear una empresa, se genera automáticamente un token principal\n- El token está listo para usar inmediatamente\n\n**Variables requeridas:**\n- base_url: URL base de la API\n- company_id: ID de la empresa\n- token: Bearer token de autenticación de usuario (para gestionar tokens/suscripciones)\n- company_token: Token de empresa (para usar el API directamente)",
+		"description": "Colección completa para gestionar tokens de API por empresa y suscripciones/licencias.\n\n🔑 **TOKENS DE EMPRESA:**\n- Crear tokens de API para integraciones\n- Listar y gestionar tokens\n- Regenerar y revocar tokens\n- Usar tokens para consumir el API\n\n💳 **SUSCRIPCIONES:**\n- Crear y gestionar suscripciones\n- Configurar límites (documentos, ventas, usuarios)\n- Activar, cancelar y renovar suscripciones\n- Verificar estado de suscripciones\n\n📊 **LÍMITES AUTOMÁTICOS:**\n- Límite mensual de documentos\n- Límite total de documentos\n- Límite total de monto de ventas\n- Verificación automática antes de crear documentos\n\n⚡ **CREACIÓN AUTOMÁTICA:**\n- Al crear una empresa, se genera automáticamente un token principal\n- El token está listo para usar inmediatamente\n\n**Variables requeridas (compartidas con otras colecciones):**\n- base_url: URL base de la API\n- company_id: ID de la empresa\n- user_token o access_token: Bearer token de autenticación de usuario (para gestionar tokens/suscripciones)\n- company_token: Token de empresa (para usar el API directamente)\n\n**Variables compartidas:** Esta colección usa las mismas variables que la colección principal para facilitar las pruebas.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -20,11 +20,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens",
 							"host": [
 								"{{base_url}}"
 							],
@@ -73,7 +73,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"body": {
@@ -81,7 +81,7 @@
 							"raw": "{\n    \"name\": \"Token para integración ERP\",\n    \"abilities\": [\"*\"],\n    \"expires_at\": \"2025-12-31 23:59:59\",\n    \"allowed_ips\": [\"192.168.1.100\"],\n    \"max_requests_per_day\": 10000,\n    \"max_requests_per_minute\": 100\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens",
 							"host": [
 								"{{base_url}}"
 							],
@@ -108,11 +108,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens/1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -144,7 +144,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"body": {
@@ -152,7 +152,7 @@
 							"raw": "{\n    \"name\": \"Token actualizado\",\n    \"is_active\": true,\n    \"abilities\": [\"invoices.create\", \"invoices.view\"],\n    \"expires_at\": \"2026-12-31 23:59:59\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens/1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -198,11 +198,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1/regenerate",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens/1/regenerate",
 							"host": [
 								"{{base_url}}"
 							],
@@ -231,11 +231,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/tokens/1",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/tokens/1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -267,7 +267,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/company/info",
+							"raw": "{{base_url}}/v1/company/info",
 							"host": [
 								"{{base_url}}"
 							],
@@ -299,11 +299,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions",
 							"host": [
 								"{{base_url}}"
 							],
@@ -330,11 +330,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/active",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/active",
 							"host": [
 								"{{base_url}}"
 							],
@@ -366,7 +366,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"body": {
@@ -374,7 +374,7 @@
 							"raw": "{\n    \"plan_name\": \"premium\",\n    \"plan_type\": \"monthly\",\n    \"price\": 299.00,\n    \"currency\": \"PEN\",\n    \"starts_at\": \"2025-01-15 00:00:00\",\n    \"ends_at\": \"2025-02-15 23:59:59\",\n    \"max_documents_per_month\": 10000,\n    \"max_total_documents\": 50000,\n    \"max_total_sales_amount\": 1000000.00,\n    \"max_users\": 5,\n    \"max_branches\": 3,\n    \"features\": [\"api_access\", \"priority_support\", \"custom_integrations\"],\n    \"payment_method\": \"stripe\",\n    \"payment_reference\": \"ch_1234567890\",\n    \"cancel_previous\": true\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions",
 							"host": [
 								"{{base_url}}"
 							],
@@ -401,11 +401,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -437,7 +437,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"body": {
@@ -445,7 +445,7 @@
 							"raw": "{\n    \"plan_name\": \"enterprise\",\n    \"max_total_documents\": 100000,\n    \"max_total_sales_amount\": 5000000.00,\n    \"max_users\": 10,\n    \"status\": \"active\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -473,11 +473,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/activate",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/1/activate",
 							"host": [
 								"{{base_url}}"
 							],
@@ -506,11 +506,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/cancel",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/1/cancel",
 							"host": [
 								"{{base_url}}"
 							],
@@ -543,7 +543,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"body": {
@@ -551,7 +551,7 @@
 							"raw": "{\n    \"months\": 1\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/1/renew",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/1/renew",
 							"host": [
 								"{{base_url}}"
 							],
@@ -598,7 +598,7 @@
 							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": 1,\n    \"client\": {\n        \"tipo_documento\": \"6\",\n        \"numero_documento\": \"20100070970\",\n        \"razon_social\": \"CLIENTE PRUEBA SAC\",\n        \"direccion\": \"AV. PRINCIPAL 123\"\n    },\n    \"serie\": \"F001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD001\",\n            \"descripcion\": \"Producto de prueba\",\n            \"cantidad\": 1,\n            \"unidad_medida\": \"NIU\",\n            \"precio_unitario\": 100.00,\n            \"tipo_igv\": \"10\",\n            \"igv\": 18.00,\n            \"precio_total\": 118.00\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/invoices",
+							"raw": "{{base_url}}/v1/invoices",
 							"host": [
 								"{{base_url}}"
 							],
@@ -635,7 +635,7 @@
 							"raw": "{\n    \"company_id\": {{company_id}},\n    \"branch_id\": 1,\n    \"client\": {\n        \"tipo_documento\": \"1\",\n        \"numero_documento\": \"12345678\",\n        \"nombre\": \"Juan Pérez\",\n        \"direccion\": \"AV. PRINCIPAL 456\"\n    },\n    \"serie\": \"B001\",\n    \"fecha_emision\": \"2025-01-15\",\n    \"moneda\": \"PEN\",\n    \"detalles\": [\n        {\n            \"codigo\": \"PROD002\",\n            \"descripcion\": \"Producto de prueba\",\n            \"cantidad\": 2,\n            \"unidad_medida\": \"NIU\",\n            \"precio_unitario\": 50.00,\n            \"tipo_igv\": \"10\",\n            \"igv\": 18.00,\n            \"precio_total\": 118.00\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/boletas",
+							"raw": "{{base_url}}/v1/boletas",
 							"host": [
 								"{{base_url}}"
 							],
@@ -666,11 +666,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}"
+								"value": "Bearer {{user_token}}"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/companies/{{company_id}}/subscriptions/active",
+							"raw": "{{base_url}}/v1/companies/{{company_id}}/subscriptions/active",
 							"host": [
 								"{{base_url}}"
 							],
@@ -694,25 +694,48 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:8000",
-			"type": "string"
+			"value": "http://localhost:8000/api",
+			"type": "string",
+			"description": {
+				"content": "URL base del API - Compartida con otras colecciones",
+				"type": "text/plain"
+			}
 		},
 		{
 			"key": "company_id",
-			"value": "1",
-			"type": "string"
+			"value": "",
+			"type": "string",
+			"description": {
+				"content": "ID de empresa - Compartida con otras colecciones",
+				"type": "text/plain"
+			}
 		},
 		{
-			"key": "token",
-			"value": "your_bearer_token_here",
+			"key": "user_token",
+			"value": "",
 			"type": "string",
-			"description": "Token de autenticación de usuario (obtenido con /auth/login)"
+			"description": {
+				"content": "Token de usuario (Sanctum) - Compartido con otras colecciones. Se obtiene con /auth/login. También puede usar 'access_token'.",
+				"type": "text/plain"
+			}
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string",
+			"description": {
+				"content": "Token de acceso de usuario - Alias de user_token. Compartido con otras colecciones.",
+				"type": "text/plain"
+			}
 		},
 		{
 			"key": "company_token",
-			"value": "your_company_api_token_here",
+			"value": "",
 			"type": "string",
-			"description": "Token de API de la empresa (obtenido al crear un token o automáticamente al crear la empresa)"
+			"description": {
+				"content": "Token de API de la empresa - Compartido con otras colecciones. Se obtiene al crear un token o automáticamente al crear la empresa.",
+				"type": "text/plain"
+			}
 		}
 	]
 }

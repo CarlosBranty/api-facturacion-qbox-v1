@@ -134,7 +134,25 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        // Si es un token de empresa, no se puede hacer logout (solo revocar el token)
+        $companyToken = $request->attributes->get('company_token');
+        if ($companyToken) {
+            return response()->json([
+                'message' => 'Los tokens de empresa no se pueden cerrar sesión. Usa DELETE /v1/companies/{id}/tokens/{token_id} para revocar el token.',
+                'status' => 'info'
+            ], 200);
+        }
+
+        // Si es un token de usuario (Sanctum)
+        $user = $request->user();
+        if (!$user || !method_exists($user, 'currentAccessToken')) {
+            return response()->json([
+                'message' => 'No se pudo cerrar sesión',
+                'status' => 'error'
+            ], 400);
+        }
+
+        $user->currentAccessToken()->delete();
 
         return response()->json([
             'message' => 'Logout exitoso'
