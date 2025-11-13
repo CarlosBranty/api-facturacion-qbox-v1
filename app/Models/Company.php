@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\CompanyApiToken;
+use App\Models\Subscription;
 
 class Company extends Model
 {
@@ -228,6 +229,61 @@ class Company extends Model
         }
     }
 
+    /**
+     * Crear suscripción por defecto al crear empresa
+     */
+    public function createDefaultSubscription(): void
+    {
+        try {
+            // Verificar si ya existe una suscripción activa
+            if ($this->activeSubscription()) {
+                \Log::info('La empresa ya tiene una suscripción activa, omitiendo creación de suscripción por defecto', [
+                    'company_id' => $this->id
+                ]);
+                return;
+            }
+
+            // Crear suscripción básica por defecto
+            Subscription::create([
+                'company_id' => $this->id,
+                'plan_name' => 'Plan Inicial',
+                'plan_type' => 'lifetime', // Sin expiración por defecto, puede cambiarse después
+                'price' => 0.00,
+                'currency' => 'PEN',
+                'status' => 'active',
+                'starts_at' => now(),
+                'ends_at' => null, // Sin expiración
+                'trial_ends_at' => null,
+                'max_documents_per_month' => null, // Ilimitado por defecto
+                'max_total_documents' => null, // Ilimitado por defecto
+                'total_documents_created' => 0,
+                'max_total_sales_amount' => null, // Ilimitado por defecto
+                'total_sales_amount' => 0.00,
+                'max_users' => null, // Ilimitado por defecto
+                'max_branches' => null, // Ilimitado por defecto
+                'features' => [
+                    'api_access' => true,
+                    'pdf_generation' => true,
+                    'xml_generation' => true,
+                    'sunat_integration' => true,
+                ],
+                'payment_method' => null,
+                'payment_reference' => null,
+                'metadata' => [
+                    'auto_created' => true,
+                    'created_at' => now()->toIso8601String(),
+                ],
+                'notes' => 'Suscripción creada automáticamente al registrar la empresa',
+            ]);
+        } catch (\Exception $e) {
+            // Log error pero no fallar la creación de la empresa
+            \Log::error('Error al crear suscripción por defecto para empresa: ' . $e->getMessage(), [
+                'company_id' => $this->id,
+                'trace' => $e->getTraceAsString()
+            ]);
+        }
+    }
+
     public function getEndpointAttribute(): string
     {
         return $this->modo_produccion ? $this->endpoint_produccion : $this->endpoint_beta;
@@ -267,9 +323,10 @@ class Company extends Model
         //     $company->initializeDefaultConfigurations();
         // });
         
-        // Crear token de API automáticamente al crear una empresa
+        // Crear token de API y suscripción automáticamente al crear una empresa
         static::created(function ($company) {
             $company->createDefaultApiToken();
+            $company->createDefaultSubscription();
         });
     }
 
